@@ -35,7 +35,7 @@ node {
 {
 "version": "${env.BUILD_NUMBER}"
 }
-            EOF
+EOF
             """
             //Pusing files to github
             sh """
@@ -46,10 +46,5 @@ node {
    
     }
     }
-    
-    post { 
-        always { 
-            cleanWs()
-        }
-    }
+   
 }
