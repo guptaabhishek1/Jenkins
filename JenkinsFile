@@ -11,7 +11,7 @@ node {
             sh """
                git config --global user.email 'zone.abhishek@gmail.com'
                git config --global user.name 'Abhishek Gupta'
-               git clone https://${gittoken}@github.com/guptaabhishek1/Jenkins.git version_update_folde
+               git clone https://${gittoken}@github.com/guptaabhishek1/Jenkins.git version_update_folder
                cd version_update_folder
                git checkout master
             """
