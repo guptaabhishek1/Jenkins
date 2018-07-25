@@ -30,7 +30,10 @@ node {
         """
         withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
             sh """
+               git config --global user.email "zone.abhishek@gmail.com"
+               git config --global user.name "Abhishek Gupta"
                git add jenkins_build.json
+               git config --global user.email "
                git commit -m "Updating jenkins json file"
                git push
             """
