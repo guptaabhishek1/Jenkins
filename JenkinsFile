@@ -21,14 +21,15 @@ node {
     echo "PWD is ${PWD}"
 
     stage("Git push"){
-        sh '
+        sh """
             cat >jenkins_build.json <<EOF
                {
                     "version": "test"
                }
             EOF
-        '
+        """
         withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
+            sh """
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
                git push
