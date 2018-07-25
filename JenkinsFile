@@ -21,7 +21,6 @@ node {
     echo "PWD is ${PWD}"
 
     stage("Git push"){
-        def version_file = jenkins_build.json
         sh """
             cat >jenkins_build.json <<EOF
                {
