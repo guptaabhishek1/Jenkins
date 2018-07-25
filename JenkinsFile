@@ -21,21 +21,17 @@ node {
     echo "PWD is ${PWD}"
 
     stage("Git push"){
-        sh """
-            cat >jenkins_build.json <<EOF
-               {
-                    "version": "test"
-               }
-            EOF
-        """
         withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
+        
+            // Checking out the code from GITHUB
             sh """
                git config --global user.email 'zone.abhishek@gmail.com'
                git config --global user.name 'Abhishek Gupta'
-               git remote set-url origin https://${gittoken}@https://github.com/guptaabhishek1/Jenkins.git
+               git remote set-url origin https://${gittoken}@github.com/guptaabhishek1/Jenkins.git
                git checkout master
                git branch
             """
+            // Updating or Creating  the version file before commit 
             sh """
                cat >jenkins_build.json <<EOF
                {
@@ -43,6 +39,7 @@ node {
                }
                EOF
             """
+            //Pusing files to github
             sh """
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
