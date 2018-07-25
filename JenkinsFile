@@ -1,0 +1,32 @@
+import groovy.json.JsonSlurperClassic
+
+node {
+    echo 'Hello World'
+    echo 'This is test'
+    def buildNumber = env.BUILD_NUMBER
+    def workspace = env.WORKSPACE
+    def buildUrl = env.BUILD_URL
+    def buildNo = env.BUILD_NO
+    def PWD = pwd()
+    
+    echo env.GIT_REPO_URL
+    echo env.GIT_COMMIT
+    echo env.GIT_BRANCH
+    echo env.GIT_REVISION
+    
+    // PRINT ENVIRONMENT TO JOB
+    echo "workspace directory is ${workspace}"
+    echo "build URL is ${env.BUILD_URL}"
+    echo "build URL is ${env.BUILD_NO}"
+    echo "PWD is ${PWD}"
+
+    stage("Git push"){
+        
+        withCredentials([string(credentialsId: 'gittoken', variable: 'gittoken')]) {
+            sh """
+                git branch
+            """
+   
+    }
+    }
+}
