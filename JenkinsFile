@@ -33,11 +33,11 @@ node {
             """
             // Updating or Creating  the version file before commit 
             sh """
-               cat >jenkins_build.json <<EOF 
-               {
-                    "version": "96"
-               }
-               EOF
+cat >jenkins_build.json <<EOF 
+{
+"version": "96"
+}
+EOF
             """
             //Pusing files to github
             sh """
