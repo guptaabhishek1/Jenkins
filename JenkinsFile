@@ -41,7 +41,7 @@ node {
             """
             //Pusing files to github
             sh """
-               git pull
+               git merge origin origin/master
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
                git push
