@@ -2,7 +2,7 @@ node {
    
     def buildNumber = env.BUILD_NUMBER
     def workspace = env.WORKSPACE
-
+    cleanWs()
     stage("Git push"){
         checkout scm
         withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
