@@ -17,7 +17,7 @@ node {
     
     echo "workspace directory is ${workspace}"
     echo "build URL is ${env.BUILD_URL}"
-    echo "build No is ${env.BUILD_NO}"
+    echo "build No is ${env.BUILD_NUMBER}"
     echo "PWD is ${PWD}"
 
     stage("Git push"){
@@ -35,7 +35,7 @@ node {
             sh """
                cat >jenkins_build.json <<EOF
                {
-                    "version": "test"
+                    "version": "${env.BUILD_NUMBER}"
                }
                EOF
             """
