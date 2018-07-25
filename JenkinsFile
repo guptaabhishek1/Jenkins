@@ -29,8 +29,7 @@ node {
                git config --global user.email 'zone.abhishek@gmail.com'
                git config --global user.name 'Abhishek Gupta'
                git remote set-url origin https://${gittoken}@github.com/guptaabhishek1/Jenkins.git
-               # git checkout master
-               git branch
+               git checkout master
             """
             // Updating or Creating  the version file before commit 
             sh """
@@ -42,10 +41,9 @@ node {
             """
             //Pusing files to github
             sh """
-               #git merge origin origin/master
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
-               git push HEAD:master
+               git push origin HEAD:master
             """
    
     }
