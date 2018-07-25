@@ -22,7 +22,7 @@ node {
 
     stage("Git push"){
         
-        withCredentials([string(credentialsId: 'gittoken', variable: 'gittoken')]) {
+        withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
             sh """
                 git branch
             """
