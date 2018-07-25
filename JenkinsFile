@@ -1,8 +1,7 @@
 node {
-   
-    def buildNumber = env.BUILD_NUMBER
-    def workspace = env.WORKSPACE
+    //Cleaning ws before starting script
     cleanWs()
+    
     stage("Git push"){
         checkout scm
         withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
@@ -11,8 +10,7 @@ node {
             sh """
                git config --global user.email 'zone.abhishek@gmail.com'
                git config --global user.name 'Abhishek Gupta'
-               git remote set-url origin https://${gittoken}@github.com/guptaabhishek1/Jenkins.git #version_update_folder
-               #cd version_update_folder
+               git remote set-url origin https://${gittoken}@github.com/guptaabhishek1/Jenkins.git
                git checkout master
             """
             
@@ -20,7 +18,8 @@ node {
             sh """
             cat >jenkins_build.json <<EOF 
 {
-"version": "${env.BUILD_NUMBER}"
+"version": "${env.BUILD_NUMBER}",
+"BuildNo": "${env.BUILD_NUMBER}"
 }
 EOF
             """
@@ -29,7 +28,6 @@ EOF
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
                git push origin HEAD:master
-               #rm -rf version_update_folder
             """
             
    
