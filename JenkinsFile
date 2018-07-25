@@ -11,8 +11,8 @@ node {
             sh """
                git config --global user.email 'zone.abhishek@gmail.com'
                git config --global user.name 'Abhishek Gupta'
-               git clone https://${gittoken}@github.com/guptaabhishek1/Jenkins.git version_update_folder
-               cd version_update_folder
+               git remote set-url https://${gittoken}@github.com/guptaabhishek1/Jenkins.git #version_update_folder
+               #cd version_update_folder
                git checkout master
             """
             
@@ -29,7 +29,7 @@ EOF
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
                git push origin HEAD:master
-               rm -rf version_update_folder
+               #rm -rf version_update_folder
             """
             
    
