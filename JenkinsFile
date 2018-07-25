@@ -32,7 +32,7 @@ node {
             sh """
                git config --global user.email 'zone.abhishek@gmail.com'
                git config --global user.name 'Abhishek Gupta'
-               git remote set-url origin https://${git_token}@https://github.com/guptaabhishek1/Jenkins.git
+               git remote set-url origin https://${gittoken}@https://github.com/guptaabhishek1/Jenkins.git
                git checkout master
                git branch
                git add jenkins_build.json
