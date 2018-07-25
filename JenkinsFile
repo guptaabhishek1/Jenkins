@@ -35,11 +35,15 @@ node {
                git remote set-url origin https://${gittoken}@https://github.com/guptaabhishek1/Jenkins.git
                git checkout master
                git branch
+            """
+            sh """
                cat >jenkins_build.json <<EOF
                {
                     "version": "test"
                }
                EOF
+            """
+            sh """
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
                git push
