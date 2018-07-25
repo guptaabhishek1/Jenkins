@@ -21,6 +21,7 @@ node {
     echo "PWD is ${PWD}"
 
     stage("Git push"){
+        def version_file = jenkins_build.json
         sh """
             cat >jenkins_build.json <<EOF
                {
@@ -35,6 +36,11 @@ node {
                git remote set-url origin https://${gittoken}@https://github.com/guptaabhishek1/Jenkins.git
                git checkout master
                git branch
+               cat >jenkins_build.json <<EOF
+               {
+                    "version": "test"
+               }
+               EOF
                git add jenkins_build.json
                git commit -m "Updating jenkins json file"
                git push
