@@ -33,9 +33,9 @@ node {
             """
             // Updating or Creating  the version file before commit 
             sh """
-               cat >jenkins_build.json <<EOF
+               cat >jenkins_build.json <<EOF 
                {
-                    "version": "${env.BUILD_NUMBER}"
+                    "version": "96"
                }
                EOF
             """
