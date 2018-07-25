@@ -24,7 +24,14 @@ node {
         
         withCredentials([string(credentialsId: 'github_token', variable: 'gittoken')]) {
             sh """
-                git branch
+               cat >./jenkins_build.json <<EOF
+               {
+                    "version": "test"
+               }
+               EOF
+               git add jenkins_build.json
+               git commit -m "Updating jenkins json file"
+               git push
             """
    
     }
