@@ -1,13 +1,9 @@
-import groovy.json.JsonSlurperClassic
-
 node {
-    echo 'Hello World'
-    echo 'This is test'
+   
     def buildNumber = env.BUILD_NUMBER
     def workspace = env.WORKSPACE
     def buildUrl = env.BUILD_URL
     def buildNo = env.BUILD_NO
-    def PWD = pwd()
     
     //echo env.GIT_REPO_URL
     //echo env.GIT_COMMIT
@@ -31,13 +27,14 @@ node {
                git remote set-url origin https://${gittoken}@github.com/guptaabhishek1/Jenkins.git
                git checkout master
             """
+            
             // Updating or Creating  the version file before commit 
             sh """
-cat >jenkins_build.json <<EOF 
+            cat >jenkins_build.json <<EOF 
 {
-"version": "96"
+"version": "${env.BUILD_NUMBER}"
 }
-EOF
+            EOF
             """
             //Pusing files to github
             sh """
