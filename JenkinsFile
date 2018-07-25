@@ -1,3 +1,8 @@
+BRANCH_TEST = "master"
+EMAIL = "jenkins@gmail.com"
+USERNAME = "jenkins_job"
+GIT_URL = "github.com/guptaabhishek1/Jenkins.git"
+
 node {
     //Cleaning ws before starting script
     cleanWs()
@@ -8,9 +13,9 @@ node {
         
             // Checking out the code from GITHUB
             sh """
-               git config --global user.email 'zone.abhishek@gmail.com'
-               git config --global user.name 'Abhishek Gupta'
-               git remote set-url origin https://${gittoken}@github.com/guptaabhishek1/Jenkins.git
+               git config --global user.email '${EMAIL}'
+               git config --global user.name '${USERNAME}'
+               git remote set-url origin https://${gittoken}@${GIT_URL}
                git checkout master
             """
             
