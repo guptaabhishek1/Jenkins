@@ -1,0 +1,7 @@
+node{
+
+  def gitToken
+      withCredentials([string(credentialsId: 'gitToken', variable: 'TOKEN')]) {
+          gitToken = env.TOKEN
+      }
+}
