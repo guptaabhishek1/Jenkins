@@ -24,8 +24,8 @@ node{
   stage('UpdateBuildStatus') {
         echo "${currentBuild.result}"
         echo "${buildNumber}"
+        def build_date = 'date +%F'.execute()
         sh """
-          build_date='date +%F'.execute()
           echo ${build_date}
           cat >build_${buildNumber}/build_reports.json <<EOF
 {
