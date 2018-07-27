@@ -1,5 +1,6 @@
 node{
 
+  def buildNumber = env.BUILD_NUMBER
   def gitToken
       withCredentials([string(credentialsId: 'github_token', variable: 'TOKEN')]) {
           gitToken = env.TOKEN
@@ -21,7 +22,9 @@ node{
         }
 
   stage('UpdateBuildStatus') {
-  
+        echo "${currentBuild.result}"
+        echo "${buildNumber}"
+        
         sh """
           date_stamp=`date +%F`
           cat >"${date_stamp}/build_${buildNumber}/build_reports.json" <<EOF
