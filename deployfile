@@ -21,9 +21,10 @@ node{
         }
 
   stage('UpdateBuildStatus') {
+  
         sh """
-          datestamp=`date +%F`
-          cat >"${datestamp}/build_${buildNumber}/build_reports.json" <<EOF
+          date_stamp=`date +%F`
+          cat >"${date_stamp}/build_${buildNumber}/build_reports.json" <<EOF
 {
   "buildNumber": "${buildNumber}",
   "buildstatus": "${currentBuild.result}"
@@ -32,8 +33,8 @@ EOF
         """
         //Pusing files to github
         sh """
-           datestamp=`date +%F`
-           git add ${datestamp}/build_${buildNumber}/build_reports.json
+           date_stamp=`date +%F`
+           git add ${date_stamp}/build_${buildNumber}/build_reports.json
            git commit -m "Updating jenkins json file"
            git push origin HEAD:master
         """
