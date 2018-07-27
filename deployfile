@@ -11,9 +11,8 @@ node{
     currentBuild.result = 'SUCCESS'
   }
   
-  finally {
 
-        stage('CheckoutReports') {
+  stage('CheckoutReports') {
           checkout([$class                    : 'GitSCM', branches: [
                     [name: '*/master']
             ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
@@ -21,7 +20,7 @@ node{
             ]])
         }
 
-        stage('UpdateBuildStatus') {
+  stage('UpdateBuildStatus') {
         sh """
           datestamp=`date +%F`
           cat >${datestamp}/build_${buildNumber}/build_reports.json <<EOF
@@ -40,5 +39,5 @@ EOF
         """
 
         }
-}
+
 }
