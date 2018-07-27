@@ -1,7 +1,7 @@
 node{
 
   def gitToken
-      withCredentials([string(credentialsId: 'gitToken', variable: 'TOKEN')]) {
+      withCredentials([string(credentialsId: 'github_token', variable: 'TOKEN')]) {
           gitToken = env.TOKEN
       }
       
