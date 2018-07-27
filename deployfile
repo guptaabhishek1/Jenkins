@@ -1,6 +1,6 @@
 node{
 
-  def buildNumber = env.BUILD_NUMBER
+  def buildNumber = "256"
   def gitToken
       withCredentials([string(credentialsId: 'github_token', variable: 'TOKEN')]) {
           gitToken = env.TOKEN
