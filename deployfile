@@ -4,4 +4,40 @@ node{
       withCredentials([string(credentialsId: 'gitToken', variable: 'TOKEN')]) {
           gitToken = env.TOKEN
       }
+      
+  stage('IntegrationTest') {
+    echo 'Testing...'
+    echo 'Such build, wow!'
+    currentBuild.result = 'SUCCESS'
+  }
+  
+  finally {
+
+        stage('CheckoutReports') {
+          checkout([$class                    : 'GitSCM', branches: [
+                    [name: '*/master']
+            ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
+                    [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+            ]])
+        }
+
+        stage('UpdateBuildStatus') {
+        sh """
+          datestamp=`date +%F`
+          cat >${datestamp}/build_${buildNumber}/build_reports.json <<EOF
+{
+  "buildNumber": "${buildNumber}",
+  "buildstatus": "${currentBuild.result}"
+}
+EOF
+        """
+        //Pusing files to github
+        sh """
+           datestamp=`date +%F`
+           git add {${datestamp}/build_${buildNumber}/build_reports.json
+           git commit -m "Updating jenkins json file"
+           git push origin HEAD:master
+        """
+
+        }
 }
