@@ -43,6 +43,7 @@ EOF
         sh """
            git config --global user.email '${EMAIL}'
            git config --global user.name '${USERNAME}'
+           git remote set-url origin https://${gitToken}@${GIT_URL}
            git add ${build_date}/build_${buildNumber}/build_reports1.json
            git commit -m "Updating jenkins json file"
            git push origin HEAD:master
