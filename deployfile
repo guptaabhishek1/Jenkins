@@ -26,8 +26,8 @@ node{
         echo "${buildNumber}"
         def build_date = sh(script:"date +%F", returnStdout: true).trim()
         sh """
-          echo ${build_date}
-          cat >build_${buildNumber}/build_reports.json <<EOF
+
+          cat >${build_date}/build_${buildNumber}/build_reports1.json <<EOF
 {
   "buildNumber": "${buildNumber}",
   "buildstatus": "${currentBuild.result}"
@@ -36,7 +36,7 @@ EOF
         """
         //Pusing files to github
         sh """
-           git add build_${buildNumber}/build_reports.json
+           git add ${build_date}/build_${buildNumber}/build_reports1.json
            git commit -m "Updating jenkins json file"
            git push origin HEAD:master
         """
