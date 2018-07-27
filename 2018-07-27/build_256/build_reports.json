@@ -1,6 +1,1 @@
-{
-  "buildno": "25",
-  "buildstatus": "SUCCESS"
-  "buildstatus": "SUCCESS"
-
-}
+{"buildno": "{'stderr_lines': [], u'changed': True, u'end': u'2018-07-27 07:49:10.652151', 'failed': False, u'stdout': u'258', u'cmd': u'echo 258', u'rc': 0, u'start': u'2018-07-27 07:49:10.650293', u'stderr': u'', u'delta': u'0:00:00.001858', 'stdout_lines': [u'258']}", "buildstatus": "SUCCESS"}
