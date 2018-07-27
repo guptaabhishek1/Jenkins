@@ -25,7 +25,8 @@ node{
         echo "${currentBuild.result}"
         echo "${buildNumber}"
         sh """
-          date +%F
+          build_date=`date +%F`
+          echo ${build_date}
           cat >build_${buildNumber}/build_reports.json <<EOF
 {
   "buildNumber": "${buildNumber}",
