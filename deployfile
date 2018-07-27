@@ -27,6 +27,7 @@ node{
         
         sh """
           date_stamp=`date +%F`
+          echo "${date_stamp}"
           cat >"${date_stamp}/build_${buildNumber}/build_reports.json" <<EOF
 {
   "buildNumber": "${buildNumber}",
