@@ -1,1 +1,5 @@
-{"buildno": "256", "buildstatus": "False"}
+{
+  "buildno": "256",
+  "buildstatus": "False"
+  "buildstatus": "{u'group': u'root', u'uid': 0, u'changed': False, 'failed': False, u'state': u'directory', u'gid': 0, u'mode': u'0755', u'path': u'/tmp/Jenkins/2018-07-27/build_256', u'owner': u'root', u'diff': {u'after': {u'path': u'/tmp/Jenkins/2018-07-27/build_256'}, u'before': {u'path': u'/tmp/Jenkins/2018-07-27/build_256'}}, u'size': 4096}"
+}
