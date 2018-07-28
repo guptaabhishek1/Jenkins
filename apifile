@@ -18,9 +18,9 @@ EOF
     sh """
       if [ ${Event} -gt "150000" ]
       then
-        currentBuild.result = 'SUCCESS'
+        currentBuild.result='SUCCESS'
       else
-        currentBuild='FAILED'
+        currentBuild.result='FAILED'
       fi
     """
         
