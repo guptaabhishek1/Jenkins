@@ -20,6 +20,7 @@ EOF
         currentBuild.result = 'SUCCESS'
         echo "Sending sucess status message to slack"
       else
+        echo 'Such build, wow!'
         currentBuild.result = 'FAILED'
         echo "Sending failed status message to slack"
       fi
