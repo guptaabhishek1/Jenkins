@@ -45,6 +45,7 @@ EOF
     } else {
       message = "Womp womp, an Jenkins Job ${env.JOB_BASE_NAME} just failed. here are the deets: $jobParametersMessage"
       color_code = "#FF0000"
+      color_code = "#00FF00"
       sh "sh slackStatus.sh \"$message\" \"${color_code}\" \"gherkin\" \"peragrus\""
       error("Failing Jenkins Job as Event was less than pass limit")
     }
