@@ -21,7 +21,7 @@ EOF
         echo "Sending sucess status message to slack"
       else
         echo 'Such build, wow!'
-        currentBuild = 'FAILED'
+        currentBuild='FAILED'
         echo "Sending failed status message to slack"
       fi
     """
