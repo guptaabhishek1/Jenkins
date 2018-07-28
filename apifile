@@ -5,7 +5,7 @@ node{
   stage('FetchApiFile') {
     echo 'Calling API to get event details contents'
     sh "curl ${ApiUrl} > /tmp/ApiUrl.txt"
-    def Event = sh(script:"cat /tmp/ApiUrl.txt |grep -w "Event" |head -1 |cut -d "|" -f2 |cut -d " " -f1 ", returnStdout: true).trim()
+    def Event = sh(script:"cat /tmp/ApiUrl.txt |grep -w Event |head -1 |cut -d '|' -f2 |cut -d ' ' -f1 ", returnStdout: true).trim()
     sh """
       if [ ${Event} -gt "150000" ]
       then
