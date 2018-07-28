@@ -15,7 +15,7 @@ EOF
     """
     def Event = sh(script:'cat /tmp/ApiUrl1.txt |grep -w "Event" |head -1 |cut -d "|" -f2 |cut -d " " -f1 ', returnStdout: true).trim()
     
-    if ( Event -gt "150000" ){
+    if ( Event -gt '150000' ){
         currentBuild='SUCCESS'
     }else{
         currentBuild='FAILED'
