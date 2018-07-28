@@ -14,15 +14,13 @@ Mer Event|5000 per/min|
 EOF
     """
     def Event = sh(script:'cat /tmp/ApiUrl1.txt |grep -w "Event" |head -1 |cut -d "|" -f2 |cut -d " " -f1 ', returnStdout: true).trim()
+    
     sh """
       if [ ${Event} -gt "150000" ]
       then
         currentBuild.result = 'SUCCESS'
-        echo "Sending sucess status message to slack"
       else
-        echo 'Such build, wow!'
         currentBuild='FAILED'
-        echo "Sending failed status message to slack"
       fi
     """
         
@@ -38,7 +36,14 @@ EOF
       "\nEnvironment: " + params.Environment
 
     println "$jobParametersMessage"
-      
+    
+    if (currentBuild.result == 'SUCCESS') {
+      message = "Woohoo, an integration test just passed! here are the deets: $jobParametersMessage"
+      sh "slackStatus.sh \"$message\" \"gherkin\" \"cerberus_integration\""
+    } else {
+      message = "Womp womp, an integration test just failed. here are the deets: $jobParametersMessage"
+      sh "slackStatus.sh \"$message\" \"sad\" \"cerberus_integration\""
+    }
   
   }
 }
