@@ -28,6 +28,7 @@ EOF
   }
   
   stage('Slack Status'){
+    echo "${currentBuild.result}"
     checkout scm
     sh 'git rev-parse --verify HEAD > commit'
     def commitHash = readFile('commit').trim()
