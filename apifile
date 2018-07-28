@@ -39,14 +39,14 @@ EOF
     
     if (currentBuild == 'SUCCESS') {
       message = "Woohoo, an Jenkins job ${env.JOB_BASE_NAME} just passed! Here are the parameters: $jobParametersMessage"
+      color_code = "#FF0000"
       sh """
-        color_code="#FF0000"
         sh slackStatus.sh \"$message\"  \"${color_code}\" \"gherkin\" \"peragrus\"
       """
     } else {
       message = "Womp womp, an Jenkins Job ${env.JOB_BASE_NAME} just failed. here are the deets: $jobParametersMessage"
+      color_code = "#FF0000"
       sh """
-        color_code="#FF0000"
         sh slackStatus.sh \"$message\" \"${color_code}\" \"gherkin\" \"peragrus\"
       
       """
