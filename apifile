@@ -39,10 +39,10 @@ EOF
     
     if (currentBuild == 'SUCCESS') {
       message = "Woohoo, an integration test just passed! here are the deets: $jobParametersMessage"
-      sh "./slackStatus.sh \"$message\" \"gherkin\" \"cerberus_integration\""
+      sh "sh slackStatus.sh \"$message\" \"gherkin\" \"cerberus_integration\""
     } else {
       message = "Womp womp, an integration test just failed. here are the deets: $jobParametersMessage"
-      sh "./slackStatus.sh \"$message\" \"sad\" \"cerberus_integration\""
+      sh "sh slackStatus.sh \"$message\" \"sad\" \"cerberus_integration\""
     }
   
   }
