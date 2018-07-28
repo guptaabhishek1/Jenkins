@@ -17,13 +17,34 @@ EOF
     sh """
       if [ ${Event} -gt "150000" ]
       then
-        status="Success"
+        currentBuild.result = 'SUCCESS'
         echo "Sending sucess status message to slack"
       else
-        status="Failed"
+        currentBuild.result = 'Failed'
         echo "Sending failed status message to slack"
       fi
     """
         
+  }
+  
+  stage('Slack Status'){
+    checkout scm
+    sh 'git rev-parse --verify HEAD > commit'
+    def commitHash = readFile('commit').trim()
+    
+    def jobParametersMessage = "\n" + "\nIntegrationTestVersion: " + commitHash + "\nJOB_BASE_NAME: " + env.JOB_BASE_NAME + \
+      "\nEnvironment: " + params.Environment
+
+    println "$jobParametersMessage"
+    
+    if (currentBuild.result == 'SUCCESS') {
+      message = "Woohoo, Jenkins job just passed! here are the deets: $jobParametersMessage"
+      sh "slackStatus.sh \"$message\" \"gherkin\" \"Test_integration\""
+    }else{
+      message = "Womp womp, an Jenkins job just failed. here are the deets: $jobParametersMessage"
+      sh "slackStatus.sh \"$message\" \"sad\" \"Test_integration\""
+    }
+      
+  
   }
 }
