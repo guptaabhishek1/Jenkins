@@ -19,10 +19,8 @@ EOF
       if [ ${Event} -gt "150000" ]
       then
         currentBuild='SUCCESS'
-        color="#00FF00"
       else
         currentBuild='FAILED'
-        color="#FF0000"
       fi
     """
         
@@ -30,7 +28,6 @@ EOF
   
   stage('Slack Status'){
     echo "${currentBuild}"
-    echo "${color}"
     checkout scm
     sh 'git rev-parse --verify HEAD > commit'
     def commitHash = readFile('commit').trim()
