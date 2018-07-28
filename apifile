@@ -43,7 +43,7 @@ EOF
     } else {
       message = "Womp womp, an integration test just failed. here are the deets: $jobParametersMessage"
       sh "sh slackStatus.sh \"$message\" \"sad\" \"cerberus_integration\""
-      exit 2
+      error("Build failed because of this and that..")
     }
   
   }
