@@ -5,12 +5,14 @@ node{
   stage('FetchApiFile') {
     echo 'Calling API to get event details contents'
     sh "curl ${ApiUrl} > /tmp/ApiUrl.txt"
+    sh """
     cat >/tmp/ApiUrl1.txt <<EOF
 MapName|us-east-1|us-west-1
 Event|150000 per/min|
 Agg Event|50000 per/min|
 Mer Event|5000 per/min|
 EOF
+    """
     def Event = sh(script:'cat /tmp/ApiUrl1.txt |grep -w "Event" |head -1 |cut -d "|" -f2 |cut -d " " -f1 ', returnStdout: true).trim()
     sh """
       if [ ${Event} -gt "150000" ]
