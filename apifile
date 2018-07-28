@@ -8,7 +8,7 @@ node{
     sh """
     cat >/tmp/ApiUrl1.txt <<EOF
 MapName|us-east-1|us-west-1
-Event|250000 per/min|
+Event|150000 per/min|
 Agg Event|50000 per/min|
 Mer Event|5000 per/min|
 EOF
@@ -23,6 +23,7 @@ EOF
         currentBuild='FAILED'
       fi
     """
+    
         
   }
   
