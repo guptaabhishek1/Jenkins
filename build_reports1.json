@@ -1,0 +1,8 @@
+{
+  "buildNumber": "256",
+  "buildstatus": "SUCCESS"
+  "DecisionHandler": {
+    "JarVersion": "03.00.00.05",
+    "InfrastructureVersion": "cerb-dh-1.2.6"
+  }
+}
