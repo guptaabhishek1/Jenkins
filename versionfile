@@ -1,0 +1,33 @@
+BRANCH_TEST = "master"
+EMAIL = "jenkins@gmail.com"
+USERNAME = "jenkins_job"
+GIT_URL = "github.com/guptaabhishek1/Jenkins.git"
+
+node{
+
+  def buildNumber = "256"
+  def gitToken
+      withCredentials([string(credentialsId: 'github_token', variable: 'TOKEN')]) {
+          gitToken = env.TOKEN
+      }
+      
+  stage('IntegrationTest') {
+    echo 'Testing...'
+    echo 'Such build, wow!'
+    currentBuild.result = 'SUCCESS'
+  }
+  
+  stage('FetchAppVersions'){
+    checkout([$class                    : 'GitSCM', branches: [
+                    [name: '*/master']
+            ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
+                    [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+            ]])
+            
+     def versions = readJSON file: 'versioning.json' // Read the json file
+     echo "DecisionHandler value is ${versions[DecisionHandler]}"
+
+  }
+ 
+
+}
