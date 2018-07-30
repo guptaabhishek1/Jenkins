@@ -37,7 +37,7 @@ node{
         def build_date = sh(script:"date +%F", returnStdout: true).trim()
         sh """
 
-          cat >${build_date}/build_${buildNumber}/build_reports1.json <<EOF
+          cat >build_reports1.json <<EOF
 {
   "buildNumber": "${buildNumber}",
   "buildstatus": "${currentBuild.result}"
@@ -53,7 +53,7 @@ EOF
            git config --global user.email '${EMAIL}'
            git config --global user.name '${USERNAME}'
            git remote set-url origin https://${gitToken}@${GIT_URL}
-           git add ${build_date}/build_${buildNumber}/build_reports1.json
+           git add build_reports1.json
            git commit -m "Updating jenkins json file"
            git push origin HEAD:master
         """
