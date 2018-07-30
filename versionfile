@@ -25,7 +25,8 @@ node{
             ]])
             
      def versions = readJSON file: 'versioning.json' // Read the json file
-     echo "${versions['DecisionHandler']}"
+     echo "${versions['DecisionHandler']['JarVersion']}"
+     echo "${versions['DecisionHandler']['InfrastructureVersion']}"
 
   }
  
