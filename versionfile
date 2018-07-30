@@ -30,5 +30,33 @@ node{
 
   }
  
+ stage('UpdateBuildStatus') {
+        echo "${currentBuild.result}"
+        echo "${buildNumber}"
+        def build_date = sh(script:"date +%F", returnStdout: true).trim()
+        sh """
+
+          cat >${build_date}/build_${buildNumber}/build_reports1.json <<EOF
+{
+  "buildNumber": "${buildNumber}",
+  "buildstatus": "${currentBuild.result}"
+  "DecisionHandler": {
+    "JarVersion": "${versions['DecisionHandler']['JarVersion']}",
+    "InfrastructureVersion": "${versions['DecisionHandler']['InfrastructureVersion']}"
+    }
+}
+EOF
+        """
+        //Pusing files to github
+        sh """
+           git config --global user.email '${EMAIL}'
+           git config --global user.name '${USERNAME}'
+           git remote set-url origin https://${gitToken}@${GIT_URL}
+           git add ${build_date}/build_${buildNumber}/build_reports1.json
+           git commit -m "Updating jenkins json file"
+           git push origin HEAD:master
+        """
+
+        }
 
 }
