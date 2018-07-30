@@ -40,7 +40,7 @@ node{
           cat >build_reports1.json <<EOF
 {
   "buildNumber": "${buildNumber}",
-  "buildstatus": "${currentBuild.result}"
+  "buildstatus": "${currentBuild.result}",
   "DecisionHandler": {
     "JarVersion": "${versions['DecisionHandler']['JarVersion']}",
     "InfrastructureVersion": "${versions['DecisionHandler']['InfrastructureVersion']}"
