@@ -30,7 +30,8 @@ node{
 
   }
  
- stage('UpdateBuildStatus') {
+  stage('UpdateBuildStatus') {
+        echo "${versions}"
         echo "${currentBuild.result}"
         echo "${buildNumber}"
         def build_date = sh(script:"date +%F", returnStdout: true).trim()
