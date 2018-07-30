@@ -24,7 +24,7 @@ node{
                     [url: 'https://github.com/guptaabhishek1/Jenkins.git']
             ]])
             
-     def versions = readJSON file: 'versioning.json' // Read the json file
+     versions = readJSON file: 'versioning.json' // Read the json file
      echo "${versions['DecisionHandler']['JarVersion']}"
      echo "${versions['DecisionHandler']['InfrastructureVersion']}"
 
