@@ -26,6 +26,18 @@ node{
             ]])
         }
 
+  stage('FetchAppVersions'){
+    checkout([$class                    : 'GitSCM', branches: [
+                    [name: '*/master']
+            ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
+                    [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+            ]])
+            
+     def versions = readJSON file: 'versioning.json' // Read the json file
+     echo "DecisionHandler value is $(versions[DecisionHandler])"
+     error("Failing Jenkins Job as Event was less than pass limit")
+
+  }
   stage('UpdateBuildStatus') {
         echo "${currentBuild.result}"
         echo "${buildNumber}"
