@@ -41,6 +41,10 @@ node{
 {
   "buildNumber": "${buildNumber}",
   "buildstatus": "${currentBuild.result}"
+  "DecisionHandler": {
+    "JarVersion": "${versions['DecisionHandler']['JarVersion']}",
+    "InfrastructureVersion": "${versions['DecisionHandler']['InfrastructureVersion']}"
+  }
 }
 EOF
         """
