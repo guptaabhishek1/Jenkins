@@ -7,18 +7,19 @@ node{
     checkout([$class                    : 'GitSCM', branches: [
               [name: '*/master']
       ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
-              [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+              [url: 'https://github.kdc.capitalone.com/cerberus.git']
       ]])
 
-    // get contents of csv file to string
-    csv_content = sh(script: "cat header.csv", returnStdout: true)
-    sh "cp header.csv /tmp/header.csv" 
+    // Copying header.csv file to temp location
+    sh "cp load-data/master/hazelcastState.csv /tmp/hazelcastState.csv" 
+    
     }
     
- stage('FetchCsvFile') {
+ stage('FetchEventStatus') {
 
+      // Create a temp file for comparing purpose
       sh """
-      cat >/tmp/ApiUrl1.txt <<EOF
+      cat >/tmp/actualHazelcastState.csv <<EOF
 acctHistory-native-flat, 0
 async-aggregates-acct, 49511086
 async-aggregates-masscomp, 0
@@ -29,8 +30,11 @@ ModelScores_useast1c-sliceb, 0
 segment-data, 59712618
 EOF
     """
-    compare_csv_content = sh(script: "cat /tmp/ApiUrl1.txt ", returnStdout: true)
-    def Event = sh(script:'sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"', returnStdout: true).trim()
+    
+    //Run shell script to get the status of Event Success/Failed
+    def Event = sh(script:'sh compareValues.sh "/tmp/hazelcastState.csv" "/tmp/actualHazelcastState.csv"', returnStdout: true).trim()
+    
+    //If Success 
     if (Event == 'SUCCESS'){
         currentBuild='SUCCESS'
     }else{
@@ -40,8 +44,9 @@ EOF
     echo "${currentBuild}"
     
   }
-  stage('Slack Status'){
-    echo "${currentBuild}"
+  
+ stage('Slack Status'){
+ 
     checkout scm
     sh 'git rev-parse --verify HEAD > commit'
     def commitHash = readFile('commit').trim()
