@@ -34,8 +34,17 @@ EOF
     echo "${csv_content}"
     echo "${compare_csv_content}"
 
-    def Event = sh(script:'sh -x compareValues.sh \"${csv_content}\" \"${compare_csv_content}\"', returnStdout: true).trim()
-
+    sh """
+      sh -x compareValues.sh \"${csv_content}\" \"${compare_csv_content}\"
+      echo $?
+      if [ $? -eq 0 ]
+      then
+        Event="SUCCESS"
+      else
+        Event="FAILED"
+      fi
+    """
+    echo "${Event}"
     if (Event == 'SUCCESS'){
         currentBuild='SUCCESS'
     }else{
