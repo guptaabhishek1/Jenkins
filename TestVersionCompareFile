@@ -1,0 +1,43 @@
+node{
+
+
+  stage('FetchCsvFile') {
+
+    echo 'Checking out the CSV file of load data hazelcast'
+    checkout([$class                    : 'GitSCM', branches: [
+              [name: '*/master']
+      ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
+              [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+      ]])
+
+    # get contents of csv file to string
+    csv_content = sh(script: "cat header.csv", returnStdout: true)
+    }
+    
+ stage('FetchCsvFile') {
+
+      sh """
+      cat >/tmp/ApiUrl1.txt <<EOF
+acctHistory-native-flat, 0
+async-aggregates-acct, 49511086
+async-aggregates-masscomp, 0
+async-aggregates-merchant, 5965092
+EVENT_DATA, 60549077
+EVENT_POST_AUTH,0
+ModelScores_useast1c-sliceb, 0
+segment-data, 59712618
+EOF
+    """
+    compare_csv_content = sh(script: "cat /tmp/ApiUrl1.txt ", returnStdout: true)
+    def Event = sh(script:'sh compareValues.sh ${csv_content} ${compare_csv_content}', returnStdout: true).trim()
+
+    if (Event == 'SUCCESS'){
+        currentBuild='SUCCESS'
+    }else{
+        currentBuild='FAILED'
+    }
+
+    echo "${currentBuild}"
+  }
+
+    
