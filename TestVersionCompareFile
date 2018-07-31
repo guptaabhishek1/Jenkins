@@ -12,6 +12,7 @@ node{
 
     // get contents of csv file to string
     csv_content = sh(script: "cat header.csv", returnStdout: true)
+    sh "cp header.csv /tmp/header.csv" 
     }
     
  stage('FetchCsvFile') {
@@ -33,7 +34,7 @@ EOF
     echo "${compare_csv_content}"
 
     sh """
-      sh -x compareValues.sh $csv_content $compare_csv_content
+      sh -x compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"
       
     """
 
