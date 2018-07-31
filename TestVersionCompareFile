@@ -32,11 +32,15 @@ EOF
     compare_csv_content = sh(script: "cat /tmp/ApiUrl1.txt ", returnStdout: true)
     echo "${csv_content}"
     echo "${compare_csv_content}"
-    def build_date = sh(script:'sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"', returnStdout: true).trim()
-    echo "${build_date}"
-    //sh """
-    //  sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"
-    //"""
+    def Event = sh(script:'sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"', returnStdout: true).trim()
+    if (Event == 'SUCCESS'){
+        currentBuild='SUCCESS'
+    }else{
+        currentBuild='FAILED'
+    }
+    
+    echo "${currentBuild}"
+    
 
   }
 }
