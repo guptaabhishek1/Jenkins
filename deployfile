@@ -17,15 +17,6 @@ node{
     currentBuild.result = 'SUCCESS'
   }
   
-
-  stage('CheckoutReports') {
-          checkout([$class                    : 'GitSCM', branches: [
-                    [name: '*/master']
-            ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
-                    [url: 'https://github.com/guptaabhishek1/Jenkins.git']
-            ]])
-        }
-
   stage('FetchAppVersions'){
     checkout([$class                    : 'GitSCM', branches: [
                     [name: '*/master']
@@ -33,14 +24,14 @@ node{
                     [url: 'https://github.com/guptaabhishek1/Jenkins.git']
             ]])
             
-     versionfile = sh(script:'cat versioning.json', returnStdout: true)
+     versionfile = sh(script:'cat versioning.json', returnStdout:true)
 
   }
   stage('UpdateBuildStatus') {
         echo "${versionfile}"
         echo "${buildNumber}"
         def build_date = sh(script:"date +%F", returnStdout: true).trim()
-        sh 'echo "${versionfile}" >${build_date}/build_${buildNumber}/build_reports1.json'
+        //sh 'echo "${versionfile}" >${build_date}/build_${buildNumber}/build_reports1.json'
 
         """
         //Pusing files to github
