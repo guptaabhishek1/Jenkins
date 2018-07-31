@@ -35,17 +35,8 @@ EOF
 
     sh """
       sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"
-      echo $status
     """
-    echo "${Event}"
-    
-    if (Event == 'SUCCESS'){
-        currentBuild='SUCCESS'
-    }else{
-        currentBuild='FAILED'
-    }
 
-    echo "${currentBuild}"
   }
 }
 
