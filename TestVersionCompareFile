@@ -36,13 +36,7 @@ EOF
 
     sh """
       sh -x compareValues.sh $csv_content $compare_csv_content
-      echo "$?"
-      if [ "$?" -eq 0 ]
-      then
-        Event="SUCCESS"
-      else
-        Event="FAILED"
-      fi
+      
     """
     echo "${Event}"
     if (Event == 'SUCCESS'){
