@@ -29,7 +29,7 @@ segment-data, 59712618
 EOF
     """
     compare_csv_content = sh(script: "cat /tmp/ApiUrl1.txt ", returnStdout: true)
-    def Event = sh(script:'sh compareValues.sh ${csv_content} ${compare_csv_content}', returnStdout: true).trim()
+    def Event = sh(script:'sh -x compareValues.sh ${csv_content} ${compare_csv_content}', returnStdout: true).trim()
 
     if (Event == 'SUCCESS'){
         currentBuild='SUCCESS'
