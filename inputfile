@@ -16,10 +16,7 @@ node{
   }
   
   stage('FetchAppVersions'){
-    steps {
            echo "This is test"
-
-        }
    }
 
 
