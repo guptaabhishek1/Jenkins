@@ -29,8 +29,6 @@ segment-data, 59712618
 EOF
     """
     compare_csv_content = sh(script: "cat /tmp/ApiUrl1.txt ", returnStdout: true)
-    csv_content = "test"
-    compare_csv_content = "test1"
     echo "${csv_content}"
     echo "${compare_csv_content}"
 
@@ -38,7 +36,7 @@ EOF
       sh -x compareValues.sh $csv_content $compare_csv_content
       
     """
-    echo "${Event}"
+
     if (Event == 'SUCCESS'){
         currentBuild='SUCCESS'
     }else{
