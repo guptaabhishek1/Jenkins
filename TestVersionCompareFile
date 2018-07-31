@@ -30,8 +30,6 @@ segment-data, 59712618
 EOF
     """
     compare_csv_content = sh(script: "cat /tmp/ApiUrl1.txt ", returnStdout: true)
-    echo "${csv_content}"
-    echo "${compare_csv_content}"
     def Event = sh(script:'sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"', returnStdout: true).trim()
     if (Event == 'SUCCESS'){
         currentBuild='SUCCESS'
@@ -41,8 +39,29 @@ EOF
     
     echo "${currentBuild}"
     
+  }
+  stage('Slack Status'){
+    echo "${currentBuild}"
+    checkout scm
+    sh 'git rev-parse --verify HEAD > commit'
+    def commitHash = readFile('commit').trim()
+
+    def jobParametersMessage = "\n" + "\nIntegrationTestVersion: " + commitHash + "\nJOB_BASE_NAME: " + env.JOB_BASE_NAME + \
+      "\nEnvironment: " + params.Environment
+
+    if (currentBuild == 'SUCCESS') {
+      message = "Woohoo, an Jenkins job ${env.JOB_BASE_NAME} just passed! Here are the parameters: $jobParametersMessage"
+      color_code = "#00FF00"
+      sh "sh slackStatus.sh \"$message\"  \"${color_code}\" \"gherkin\" \"peragrus\""
+    } else {
+      message = "Womp womp, an Jenkins Job ${env.JOB_BASE_NAME} just failed. here are the deets: $jobParametersMessage"
+      color_code = "#FF0000"
+      sh "sh slackStatus.sh \"$message\" \"${color_code}\" \"gherkin\" \"peragrus\""
+      error("Failing Jenkins Job as Event was less than pass limit")
+    }
 
   }
+  
 }
 
     
