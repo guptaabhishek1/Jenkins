@@ -1,8 +1,3 @@
-BRANCH_TEST = "master"
-EMAIL = "jenkins@gmail.com"
-USERNAME = "jenkins_job"
-GIT_URL = "github.com/guptaabhishek1/Jenkins.git"
-
 node{
 
       
@@ -17,6 +12,14 @@ node{
   
   stage('FetchAppVersions'){
            echo "This is test"
+           env.Proceed_message = input message: 'User input required',
+           parameters: [choice(name: 'Proceed Test Pipeline', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
+
+   }
+   
+    stage('Stage2'){
+           echo "This is Stage2"
+          
    }
 
 
