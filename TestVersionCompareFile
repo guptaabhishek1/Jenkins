@@ -10,7 +10,7 @@ node{
               [url: 'https://github.com/guptaabhishek1/Jenkins.git']
       ]])
 
-    # get contents of csv file to string
+    // get contents of csv file to string
     csv_content = sh(script: "cat header.csv", returnStdout: true)
     }
     
