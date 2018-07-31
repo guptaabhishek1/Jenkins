@@ -19,16 +19,18 @@ node{
     when {
         environment name: 'TAG_ON_DOCKER_HUB', value: 'yes'
       }
-    checkout([$class                    : 'GitSCM', branches: [
-                    [name: '*/master']
-            ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
-                    [url: 'https://github.com/guptaabhishek1/Jenkins.git']
-            ]])
-            
-     versions = sh(script: "cat versioning.json", returnStdout: true)
-     echo "${versions}"
+    steps {
+          checkout([$class                    : 'GitSCM', branches: [
+                          [name: '*/master']
+                  ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
+                          [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+                  ]])
 
-  }
+           versions = sh(script: "cat versioning.json", returnStdout: true)
+           echo "${versions}"
+
+        }
+   }
 
 
 }
