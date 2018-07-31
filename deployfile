@@ -33,23 +33,15 @@ node{
                     [url: 'https://github.com/guptaabhishek1/Jenkins.git']
             ]])
             
-     def versions = readJSON file: 'versioning.json' // Read the json file
-     echo "DecisionHandler value is ${versions[DecisionHandler]}"
-     error("Failing Jenkins Job as Event was less than pass limit")
+     versionfile = sh(script:'cat versioning.json', returnStdout: true)
 
   }
   stage('UpdateBuildStatus') {
-        echo "${currentBuild.result}"
+        echo "${versionfile}"
         echo "${buildNumber}"
         def build_date = sh(script:"date +%F", returnStdout: true).trim()
-        sh """
+        sh 'echo "${versionfile}" >${build_date}/build_${buildNumber}/build_reports1.json'
 
-          cat >${build_date}/build_${buildNumber}/build_reports1.json <<EOF
-{
-  "buildNumber": "${buildNumber}",
-  "buildstatus": "${currentBuild.result}"
-}
-EOF
         """
         //Pusing files to github
         sh """
