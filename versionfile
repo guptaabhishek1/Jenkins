@@ -36,7 +36,7 @@ node{
         sh """
 
           cat >build_reports1.json <<EOF
-"{versions}"
+"${versions}"
 EOF
         """
         //Pusing files to github
