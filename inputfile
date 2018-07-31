@@ -10,15 +10,12 @@ node{
     
     echo 'Testing...'
     echo 'Such build, wow!'
-    env.TAG_ON_DOCKER_HUB = input message: 'User input required',
-    parameters: [choice(name: 'Tag on Docker Hub', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
+    env.Proceed_message = input message: 'User input required',
+    parameters: [choice(name: 'Proceed Pipeline', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
 
   }
   
   stage('FetchAppVersions'){
-    when {
-        environment name: 'TAG_ON_DOCKER_HUB', value: 'yes'
-      }
     steps {
            echo "This is test"
 
