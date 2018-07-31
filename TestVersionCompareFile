@@ -34,7 +34,7 @@ EOF
     echo "${compare_csv_content}"
 
     sh """
-      Event=`sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"`
+      sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"`
       echo $Event
     """
     echo "${Event}"
