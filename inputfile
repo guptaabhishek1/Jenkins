@@ -1,0 +1,34 @@
+BRANCH_TEST = "master"
+EMAIL = "jenkins@gmail.com"
+USERNAME = "jenkins_job"
+GIT_URL = "github.com/guptaabhishek1/Jenkins.git"
+
+node{
+
+      
+  stage('IntegrationTest') {
+    
+    echo 'Testing...'
+    echo 'Such build, wow!'
+    env.TAG_ON_DOCKER_HUB = input message: 'User input required',
+    parameters: [choice(name: 'Tag on Docker Hub', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
+
+  }
+  
+  stage('FetchAppVersions'){
+    when {
+        environment name: 'TAG_ON_DOCKER_HUB', value: 'yes'
+      }
+    checkout([$class                    : 'GitSCM', branches: [
+                    [name: '*/master']
+            ], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
+                    [url: 'https://github.com/guptaabhishek1/Jenkins.git']
+            ]])
+            
+     versions = sh(script: "cat versioning.json", returnStdout: true)
+     echo "${versions}"
+
+  }
+
+
+}
