@@ -34,10 +34,11 @@ EOF
     echo "${compare_csv_content}"
 
     sh """
-      sh -x compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"
-      
+      Event=`sh compareValues.sh "/tmp/header.csv" "/tmp/ApiUrl1.txt"`
+      echo $Event
     """
-
+    echo "${Event}"
+    
     if (Event == 'SUCCESS'){
         currentBuild='SUCCESS'
     }else{
