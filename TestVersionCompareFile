@@ -39,5 +39,6 @@ EOF
 
     echo "${currentBuild}"
   }
+}
 
     
