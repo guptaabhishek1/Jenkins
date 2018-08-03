@@ -15,7 +15,14 @@ pipeline {
 
                             } catch (e) {
                                 //getFailnote()
-                                //FailureSlackNotification()
+                                
+                                //FailureSlackNotification
+                                message = "RMQ build Failed"
+                                color_code = "#00FF00"
+                                username = "Test"
+                                slackchannel = "#test"
+                                slackNotification(message, color_code, username, slackchannel)
+                                
                                 error("KK_Build failed because this step isn't implemented...")
 
                                 }
@@ -28,7 +35,14 @@ pipeline {
                                     buildHazelCastInfra()
                             } catch (e) {
                                     //getFailnote()
-                                    //FailureSlackNotification()
+                                    
+                                    //FailureSlackNotification 
+                                    message = "HazelCast Build Failed"
+                                    color_code = "#00FF00"
+                                    username = "Test"
+                                    slackchannel = "#test"
+                                    slackNotification(message, color_code, username, slackchannel)
+                                    
                                     error("KK_Build failed HZ...")
 
                                     }
@@ -43,7 +57,7 @@ pipeline {
             steps {
                 script {
                         // Slack Notification
-                        message = "Infrastructure up and down"
+                        message = "Infrastructure Up"
                         color_code = "#00FF00"
                         username = "Test"
                         slackchannel = "#test"
