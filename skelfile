@@ -51,7 +51,8 @@ pipeline {
                     //getNotified()
             }
 
-        } */
+        }
+        
         // This is waiting for user Input before staring application deploy stage
         stage('Wait for User Input') {
             steps {
