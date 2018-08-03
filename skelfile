@@ -42,6 +42,7 @@ pipeline {
 }
 
 def buildRMQ() {
+       echo "This is tebuildRMQst"
        build job: 'TestPipeline2', parameters:
        [string(name: 'Enviroment', value: '${env.Enviroment}')],
        [string(name: 'Test', value: '${env.Test}')],
@@ -50,6 +51,7 @@ def buildRMQ() {
 }
 
 def buildHazelCastInfra() {
+       echo "This is buildHazelCastInfra"
        build job: 'TestPipeline3', parameters:
        [string(name: 'Enviroment', value: '${env.Enviroment}')],
        [string(name: 'Test', value: '${env.Test}')],
