@@ -39,19 +39,36 @@ pipeline {
             }
         }
         
-        stage('Send notification') {
+        stage('Parallel App stage') {
             steps {
-                
-                wrap([$class: 'BuildUser']) {
-                    echo "${BUILD_USER}"
-                    echo "${BUILD_USER_ID}"
-                    echo "${BUILD_USER_EMAIL}"
-                    slackNotification()
-                    getNotified()
-                }
-            }
+                env.TAG_ON_DOCKER_HUB = input message: 'User input required',
+                parameters: [choice(name: 'Tag on Docker Hub', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
 
-        }
+                parallel(
+                    "buildCAModelScore":
+                    {
+                            echo "CAMModelScore does not run in dev"
+                            buildCAModelScore()
+                     },
+                    "Build Decision Handler": // Building DH APP
+                    {
+                            echo "buildDecisionHandler"
+                            //buildDecisionHandler()
+                    },
+                    "Build FRE": //Building FRE APP
+                    {
+                            echo "buildFraudRulesEngine"
+                            //buildFraudRulesEngine()
+                     },
+                     "USModelScore job": //Building USMS
+                     {
+                            echo "buildUSModelScore"
+                            //buildUSModelScore()
+                     }
+                ) // End Parallel App
+
+                }
+           }
  }
 }
 
@@ -99,6 +116,16 @@ def buildRMQ() {
 
 def buildHazelCastInfra() {
        build job: 'TestPipeline3', parameters:
+       [
+            string(name: 'Enviroment', value: "${env.Enviroment}"),
+            string(name: 'Test', value: "${env.Test}"),
+            string(name: 'userid', value: "${env.userid}")
+       ]
+
+}
+
+def buildCAModelScore() {
+       build job: 'TestPipeline1', parameters:
        [
             string(name: 'Enviroment', value: "${env.Enviroment}"),
             string(name: 'Test', value: "${env.Test}"),
