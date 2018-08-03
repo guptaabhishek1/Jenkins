@@ -41,11 +41,13 @@ pipeline {
         
         stage('Send notification') {
             steps {
-                    // Slack Notification
-                    message = "Infrastructure up and down"
-                    color_code = "#00FF00"
-                    username = "Test"
-                    slackchannel = "#test"
+                script {
+                        // Slack Notification
+                        message = "Infrastructure up and down"
+                        color_code = "#00FF00"
+                        username = "Test"
+                        slackchannel = "#test"
+                    }
                     
                     slackNotification(message, color_code, username, slackchannel)
                     //getNotified()
