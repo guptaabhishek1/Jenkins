@@ -36,6 +36,10 @@ pipeline {
 
                         }
                 ) // End Parallel Infrastructure execution
+                
+                env.Build_Wait_Input = input message: 'User input required to proceed with build',
+                    parameters: [choice(name: 'Build_Wait_Input', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
+
             }
         }
         
