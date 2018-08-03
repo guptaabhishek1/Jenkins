@@ -42,7 +42,12 @@ pipeline {
         stage('Send notification') {
             steps {
                     // Slack Notification
-                    slackNotification()
+                    message = "Infrastructure up and down"
+                    color_code = "#00FF00"
+                    username = "Test"
+                    slackchannel = "#test"
+                    
+                    slackNotification(message, color_code, username, slackchannel)
                     //getNotified()
             }
 
@@ -110,10 +115,9 @@ def getFailnote(){
 }
 
 // getSlackNotification
-def slackNotification(){
-   message = "Infrastructure up and Running"
-   color_code = "#FF0000"
-   sh "sh slackStatus.sh \"$message\" \"${color_code}\" \"gherkin\" \"peragrus\""
+def slackNotification(message, color_code, username, slackchannel)
+{
+   sh "sh slackStatus.sh \"${message}\" \"${color_code}\" \"${username}\" \"${slackchannel}\""
 }
 
 //Failure getSlackNotification
