@@ -1,11 +1,12 @@
 MESSAGE=$1
 COLOR_CODE=$2
+USERNAME=$3
+SLACK_CHANNEL=$4
 
 # Changses 
 EMOJI="${2:-gherkin}"
-SLACK_CHANNEL="#test"
 SLACK_HOOK="https://hooks.slack.com/services/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"
-USERNAME="Jenkins"
+
 
 # Dont not change anything from here 
 # console logging
