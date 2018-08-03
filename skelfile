@@ -38,6 +38,8 @@ pipeline {
                 ) // End Parallel Infrastructure execution
             }
         }
+ }
+}
 
 def buildRMQ() {
        build job: 'TestPipeline2', parameters:
