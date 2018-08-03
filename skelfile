@@ -45,20 +45,22 @@ def buildRMQ() {
        echo "This is tebuildRMQst"
        build job: 'TestPipeline2', parameters:
        [
-            string(name: 'Enviroment', value: '${env.Enviroment}'),
-            string(name: 'Test', value: '${env.Test}'),
-            string(name: 'userid', value: '${env.userid}')
+            string(name: 'Enviroment', value: "${env.Enviroment}"),
+            string(name: 'Test', value: "${env.Test}"),
+            string(name: 'userid', value: "${env.userid}")
        ]
 
 }
 
 def buildHazelCastInfra() {
        echo "This is buildHazelCastInfra"
+       echo "${env.Enviroment}"
+       echo "${env.Test}"
        build job: 'TestPipeline3', parameters:
        [
-            string(name: 'Enviroment', value: '${env.Enviroment}'),
-            string(name: 'Test', value: '${env.Test}'),
-            string(name: 'userid', value: '${env.userid}')
+            string(name: 'Enviroment', value: "${env.Enviroment}"),
+            string(name: 'Test', value: "${env.Test}"),
+            string(name: 'userid', value: "${env.userid}")
        ]
 
 }
