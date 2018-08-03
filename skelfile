@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Parallel Infra Stage') {
+            steps {
+                parallel(
+                        "Build RMQ":
+                        {
+                            script {
+                                try {
+                                    buildRMQ()
+                                    echo 'RMQ is UP like'
+
+                            } catch (e) {
+                                //getFailnote()
+                                //FailureSlackNotification()
+                                error("KK_Build failed because this step isn't implemented...")
+
+                                }
+                            }
+                        },
+                        "Build HZ":
+                        {
+                            script {
+                                try {
+                                    buildHazelCastInfra()
+                            } catch (e) {
+                                    //getFailnote()
+                                    //FailureSlackNotification()
+                                    error("KK_Build failed HZ...")
+
+                                    }
+                            }
+
+                        }
+                ) // End Parallel Infrastructure execution
+            }
+        }
+
+def buildRMQ() {
+       build job: 'TestPipeline2', parameters:
+       [string(name: 'Enviroment', value: '${env.Enviroment}')],
+       [string(name: 'Test', value: '${env.Test}')],
+       [string(name: 'userid', value: '${env.userdid}')]
+
+}
+
+def buildHazelCastInfra() {
+       build job: 'TestPipeline3', parameters:
+       [string(name: 'Enviroment', value: '${env.Enviroment}')],
+       [string(name: 'Test', value: '${env.Test}')],
+       [string(name: 'userid', value: '${env.userdid}')]
+
+}
+
