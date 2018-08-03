@@ -39,6 +39,19 @@ pipeline {
             }
         }
         
+        stage('Send notification') {
+            steps {
+                    echo "${BUILD_USER}"
+                    echo "${BUILD_USER_ID}"
+                    echo "${BUILD_USER_EMAIL}"
+                    // Slack Notification
+                    message = "Infrastructure up and Running"
+                    color_code = "#FF0000"
+                    sh "sh slackStatus.sh \"$message\" \"${color_code}\" \"gherkin\" \"peragrus\""
+                    //getNotified()
+            }
+
+        } */
         // This is waiting for user Input before staring application deploy stage
         stage('Wait for User Input') {
             steps {
