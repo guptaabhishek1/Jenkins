@@ -58,9 +58,10 @@ pipeline {
  }
 }
 
+// Email Notification function
 def getNotified(){
 
-    emailext body: '''"""<p>Success!! building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\':</p>
+emailext body: '''"""<p>Success!! building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\':</p>
                    <p>Check console output at "<a href="${BUILD_URL}">${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>
                    <p>RabbitMQConsole at "<a href="${ip}"":15672"</a>"   """,''',
            subject: '"Success!! building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\'"',
