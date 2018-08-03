@@ -38,11 +38,54 @@ pipeline {
                 ) // End Parallel Infrastructure execution
             }
         }
+        
+        stage('Send notification') {
+            steps {
+                wrap([$class: 'BuildUser']) {
+                    echo "${BUILD_USER}"
+                    echo "${BUILD_USER_ID}"
+                    echo "${BUILD_USER_EMAIL}"
+                    slackNotification()
+                    getNotified()
+                }
+            }
+
+        } */
  }
 }
 
+def getNotified(){
+
+    emailext body: '''"""<p>Success!! building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\':</p>
+                   <p>Check console output at "<a href="${BUILD_URL}">${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>
+                   <p>RabbitMQConsole at "<a href="${ip}"":15672"</a>"   """,''',
+           subject: '"Success!! building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\'"',
+           to: "${buildUserEmail}"
+
+}
+
+// Email Notification
+def getFailnote(){
+    // def mailRecipients =  "${BUILD_USER_EMAIL}"
+    emailext body: '''"""<p>Failed building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\':</p>
+                   <p>Check console output at "<a href="${BUILD_URL}">${JOB_NAME} [${BUILD_NUMBER}]</a>"</p>""",''',
+           subject:'"Failed building INFRA HZ & RMQ: Job \'${JOB_NAME} [${BUILD_NUMBER}]\'"',
+           to: "${buildUserEmail}"
+}
+
+// getSlackNotification
+def slackNotification(){
+   sh "slackstatus.sh"
+}
+
+//Failure getSlackNotification
+def FailureSlackNotification(){
+   echo "${workspace}"
+   echo "${pwd}"
+   sh "./slackstatus.sh"
+}
+
 def buildRMQ() {
-       echo "This is tebuildRMQst"
        build job: 'TestPipeline2', parameters:
        [
             string(name: 'Enviroment', value: "${env.Enviroment}"),
@@ -53,9 +96,6 @@ def buildRMQ() {
 }
 
 def buildHazelCastInfra() {
-       echo "This is buildHazelCastInfra"
-       echo "${env.Enviroment}"
-       echo "${env.Test}"
        build job: 'TestPipeline3', parameters:
        [
             string(name: 'Enviroment', value: "${env.Enviroment}"),
