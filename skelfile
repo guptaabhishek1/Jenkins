@@ -41,9 +41,6 @@ pipeline {
         
         stage('Send notification') {
             steps {
-                    echo "${BUILD_USER}"
-                    echo "${BUILD_USER_ID}"
-                    echo "${BUILD_USER_EMAIL}"
                     // Slack Notification
                     slackNotification()
                     //getNotified()
