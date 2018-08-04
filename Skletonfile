@@ -172,7 +172,8 @@ def buildCAModelScore() {
        [
             string(name: 'Env', value: "${env.Enviroment},${env.AZ}"),
             string(name: 'Test', value: "${env.Test}"),
-            string(name: 'userid', value: "${env.userid}")
+            string(name: 'userid', value: "${env.userid}"),
+            string(name: 'AZ', value: "${env.TargetCluster}")
        ]
 
 }
