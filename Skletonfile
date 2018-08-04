@@ -166,7 +166,7 @@ def buildHazelCastInfra() {
 def buildCAModelScore() {
        build job: 'TestPipeline1', parameters:
        [
-            string(name: 'Enviroment', value: "${env.Enviroment}"),
+            string(name: 'Enviroment', value: "${env.Enviroment},${env.AZ}"),
             string(name: 'Test', value: "${env.Test}"),
             string(name: 'userid', value: "${env.userid}")
        ]
