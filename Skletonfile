@@ -171,11 +171,10 @@ def buildCAModelScore() {
        
        build job: 'TestPipeline1', parameters:
        [
-            string(name: 'Env', value: "${env.Enviroment},${env.AZ}"),
-            string(name: 'Test', value: "${env.Test}"),
-            string(name: 'userid', value: "${env.userid}"),
+            string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
+            string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
             string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
-            string(name: 'AZ', value: "${env.TargetCluster}")
+            string(name: 'AZ', value: "${env.MultiAZ}")
        ]
 
 }
