@@ -73,8 +73,7 @@ pipeline {
         stage('Wait for User Input') {
             steps {
                 script {
-                    User_Input_message = input message: 'User input required',
-                        parameters: [choice(name: 'Proceed Application build', choices: 'NO\nYES', description: 'Choose "YES" if you want to deploy this build')]
+                    User_Input_message = input message: 'User input required to Proceed/Abort'
                 }
             }
         }
