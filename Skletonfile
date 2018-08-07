@@ -92,6 +92,7 @@ pipeline {
                                 buildCAModelScore()
                             }catch (e) {
                                 echo "${BUILD_URL}"
+                                echo "${Downstream_url}
                                 echo "buildCAModelScore Failed but job needs to be set to success"
                             }
                         }
@@ -193,7 +194,7 @@ def buildCAModelScore() {
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
-       println build_run.absoluteUrl
-       echo "${build_run}"
+       def Downstream_url = "${build_run}.absoluteUrl"
+       echo ${Downstream_url}
 }
 
