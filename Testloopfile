@@ -9,12 +9,15 @@ pipeline {
                         "Build RMQ":
                         {
                             script {
+                              def status = "FAILED"
                               while(True){
                                 try {
                                     buildRMQ()
                                     echo 'RMQ is UP like'
+                                    status = "SUCCESS"
                                 } catch (e) {
                                   echo "This is failed"
+                                  
                                 }
                               }
                             }
