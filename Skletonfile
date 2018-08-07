@@ -73,9 +73,9 @@ pipeline {
         stage('Wait for User Input') {
             steps {
                 script {
-                    User_Input_message = input message: 'User input required to Proceed/Abort',
-                        parameters: [choice(name: 'Click Proceed or Abort', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
-            
+                    //User_Input_message = input message: 'User input required to Proceed/Abort',
+                    //    parameters: [choice(name: 'Click Proceed or Abort', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build')]
+                    echo "start"
                 }
             }
         }
