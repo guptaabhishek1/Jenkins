@@ -91,7 +91,7 @@ pipeline {
                                 // getting build status and buildjob rul
                                 def result = buildCAModelScore()
                                 echo "${result}"
-                                if(result.buildStatus == 'failed'){
+                                if(result.buildStatus == 'FAILURE'){
                                     echo "${result.buildUrl}"
                                     echo "buildCAModelScore Failed but job needs to be set to success"
                                 }
