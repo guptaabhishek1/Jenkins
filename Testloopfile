@@ -10,7 +10,7 @@ pipeline {
                         {
                             script {
                               def status = "FAILED"
-                              while(True){
+                              while(status == "FAILED"){
                                 try {
                                     buildRMQ()
                                     echo 'RMQ is UP like'
