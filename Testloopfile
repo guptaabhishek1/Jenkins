@@ -17,6 +17,7 @@ pipeline {
                                     status = "SUCCESS"
                                 } catch (e) {
                                   echo "This is failed"
+                                  Input_message = input message: 'Retry RMQ Build Proceed/Abort',
                                   
                                 }
                               }
