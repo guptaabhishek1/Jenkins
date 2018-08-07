@@ -91,8 +91,7 @@ pipeline {
                                 echo "CAMModelScore does not run in dev"
                                 buildCAModelScore()
                             }catch (e) {
-                                echo "${BUILD_URL}"
-                                echo "${Downstream_url}
+                                echo "${Downstream_url}"
                                 echo "buildCAModelScore Failed but job needs to be set to success"
                             }
                         }
@@ -195,6 +194,6 @@ def buildCAModelScore() {
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
        def Downstream_url = "${build_run}.absoluteUrl"
-       echo ${Downstream_url}
+       echo "${Downstream_url}"
 }
 
