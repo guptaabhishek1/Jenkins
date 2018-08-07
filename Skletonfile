@@ -10,7 +10,7 @@ pipeline {
                         {
                             script {
                                 try {
-                                    buildRMQ()
+                                    //buildRMQ()
                                     echo 'RMQ is UP like'
 
                             } catch (e) {
@@ -32,7 +32,8 @@ pipeline {
                         {
                             script {
                                 try {
-                                    buildHazelCastInfra()
+                                    //buildHazelCastInfra()
+                                    echo "HZ is up"
                             } catch (e) {
                                     //getFailnote()
                                     
@@ -89,9 +90,9 @@ pipeline {
                         script{
                             try {
                                 echo "CAMModelScore does not run in dev"
-                                buildCAModelScore()
+                                def build_url = buildCAModelScore()
                             }catch (e) {
-                                echo "${Downstream_url}"
+                                echo "${build_url}"
                                 echo "buildCAModelScore Failed but job needs to be set to success"
                             }
                         }
@@ -193,8 +194,7 @@ def buildCAModelScore() {
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
-       echo "This is test"
        def Downstream_url = "${build_run.absoluteUrl}"
-       echo "${Downstream_url}"
+       return "${Downstream_url}"
 }
 
