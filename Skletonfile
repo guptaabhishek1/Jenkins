@@ -186,13 +186,14 @@ def buildHazelCastInfra() {
 
 def buildCAModelScore() {
        
-       build job: 'TestPipeline1', parameters:
-       [
-            string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
-            string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
-            string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
-            string(name: 'AZ', value: "${env.MultiAZ}")
-       ]
-       echo "${BUILD_URL}"
+       build_run = build job: 'TestPipeline1', propagate: false, parameters:
+           [
+                string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
+                string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
+                string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
+                string(name: 'AZ', value: "${env.MultiAZ}")
+           ]
+       println build_run.result
+       echo "${build_run}"
 }
 
