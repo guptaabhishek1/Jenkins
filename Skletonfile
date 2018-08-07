@@ -94,7 +94,6 @@ pipeline {
                                 echo "${BUILD_URL}"
                                 echo "buildCAModelScore Failed but job needs to be set to success"
                             }
-                            
                         }
                            
                      },
@@ -106,7 +105,8 @@ pipeline {
                                 //buildDecisionHandler()
                              }catch (e) {
                                 echo "buildCAModelScore Failed but job needs to be set to success"
-                            }   
+                            }  
+                        }
                     },
                     "Build FRE": //Building FRE APP
                     {
@@ -117,6 +117,7 @@ pipeline {
                             }catch (e) {
                                 echo "buildCAModelScore Failed but job needs to be set to success"
                             }
+                        }
                      },
                      "USModelScore job": //Building USMS
                      {
