@@ -89,10 +89,9 @@ pipeline {
                     {
                         script{
                                 // getting build status and buildjob rul
-                                def (build_status, build_url) = buildCAModelScore()
-                                echo "${build_url}"
-                                echo "${build_status}"
-                                if (build_url != 'success'){
+                                def result = buildCAModelScore()
+                                if(result.buildStatus == 'failed'){
+                                    echo "${result.buildUrl}"
                                     echo "buildCAModelScore Failed but job needs to be set to success"
                                 }
                             
@@ -195,6 +194,7 @@ def buildCAModelScore() {
            ]
        def build_job_url = "${build_run.absoluteUrl}"
        def build_job_status = "${build_run.result}"
-       return ["${build_job_status}", "${Downstream_url}"]
+       //return ["${build_job_status}", "${Downstream_url}"]
+       return [buildStatus:"${build_job_status}", buildUrl:"${build_job_url}"]
 }
 
