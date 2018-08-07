@@ -192,9 +192,7 @@ def buildCAModelScore() {
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
-       //def build_job_url = "${build_run.absoluteUrl}"
-       //def build_job_status = "${build_run.result}"
-       //return ["${build_job_status}", "${Downstream_url}"]
+
        return [buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 }
 
