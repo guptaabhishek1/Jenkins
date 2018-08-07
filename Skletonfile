@@ -86,12 +86,15 @@ pipeline {
                 parallel(
                     "buildCAModelScore":
                     {
-                        try {
-                            echo "CAMModelScore does not run in dev"
-                            buildCAModelScore()
-                        }catch (e) {
-                            echo "buildCAModelScore Failed but job needs to be set to success"
-                        }   
+                        script{
+                            try {
+                                echo "CAMModelScore does not run in dev"
+                                buildCAModelScore()
+                            }catch (e) {
+                                echo "buildCAModelScore Failed but job needs to be set to success"
+                            }
+                            
+                        }
                            
                      },
                     "Build Decision Handler": // Building DH APP
