@@ -88,13 +88,11 @@ pipeline {
                     "buildCAModelScore":
                     {
                         script{
-                            try {
-                                echo "CAMModelScore does not run in dev"
+                           
                                 def build_url = buildCAModelScore()
-                            }catch (e) {
                                 echo "${build_url}"
                                 echo "buildCAModelScore Failed but job needs to be set to success"
-                            }
+                            
                         }
                            
                      },
