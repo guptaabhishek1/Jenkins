@@ -88,10 +88,13 @@ pipeline {
                     "buildCAModelScore":
                     {
                         script{
-                           
-                                def build_url = buildCAModelScore()
+                                // getting build status and buildjob rul
+                                def (build_status, build_url) = buildCAModelScore()
                                 echo "${build_url}"
-                                echo "buildCAModelScore Failed but job needs to be set to success"
+                                echo "${build_status}"
+                                if (build_url != 'success'){
+                                    echo "buildCAModelScore Failed but job needs to be set to success"
+                                }
                             
                         }
                            
@@ -99,12 +102,10 @@ pipeline {
                     "Build Decision Handler": // Building DH APP
                     {
                         script{
-                            try {
+ 
                                 echo "buildDecisionHandler"
                                 //buildDecisionHandler()
-                             }catch (e) {
                                 echo "buildCAModelScore Failed but job needs to be set to success"
-                            }  
                         }
                     },
                     "Build FRE": //Building FRE APP
@@ -192,7 +193,8 @@ def buildCAModelScore() {
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
-       def Downstream_url = "${build_run.absoluteUrl}"
-       return "${Downstream_url}"
+       def build_job_url = "${build_run.absoluteUrl}"
+       def build_job_status = "${build_run.result}"
+       return ["${build_job_status}", "${Downstream_url}"]
 }
 
