@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Parallel Infra Stage') {
+            steps {
+                parallel(
+                        "Build RMQ":
+                        {
+                            script {
+                              while(True){
+                                try {
+                                    buildRMQ()
+                                    echo 'RMQ is UP like'
+                                } catch (e) {
+                                  echo "This is failed"
+                                }
+                              }
+                            }
+                        },
+                        
+                ) // End Parallel Infrastructure execution
+            }
+        }
+        
+ }
+}
+
+
+def buildRMQ() {
+       build job: 'TestPipeline2', parameters:
+       [
+            string(name: 'Enviroment', value: "${env.Enviroment}"),
+            string(name: 'Test', value: "${env.Test}"),
+            string(name: 'userid', value: "${env.userid}")
+       ]
+
+}
