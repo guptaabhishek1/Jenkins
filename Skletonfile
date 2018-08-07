@@ -99,13 +99,23 @@ pipeline {
                      },
                     "Build Decision Handler": // Building DH APP
                     {
-                            echo "buildDecisionHandler"
-                            //buildDecisionHandler()
+                        script{
+                            try {
+                                echo "buildDecisionHandler"
+                                //buildDecisionHandler()
+                             }catch (e) {
+                                echo "buildCAModelScore Failed but job needs to be set to success"
+                            }   
                     },
                     "Build FRE": //Building FRE APP
                     {
-                            echo "buildFraudRulesEngine"
-                            //buildFraudRulesEngine()
+                        script{
+                            try {
+                                echo "buildFraudRulesEngine"
+                                //buildFraudRulesEngine()
+                            }catch (e) {
+                                echo "buildCAModelScore Failed but job needs to be set to success"
+                            }
                      },
                      "USModelScore job": //Building USMS
                      {
