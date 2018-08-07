@@ -87,11 +87,14 @@ pipeline {
                 parallel(
                     "buildCAModelScore":
                     {
+                        script{
                                 // getting status of application
                                 def result = buildCAModelScore()
+                                println result
                                 if(result.buildStatus == 'FAILURE'){
                                     echo "${result.buildUrl}"
                                     echo "buildCAModelScore Failed but job needs to be set to success"
+                                }
                             
                         }
                            
