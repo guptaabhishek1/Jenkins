@@ -91,6 +91,7 @@ pipeline {
                                 echo "CAMModelScore does not run in dev"
                                 buildCAModelScore()
                             }catch (e) {
+                                echo "${BUILD_URL}"
                                 echo "buildCAModelScore Failed but job needs to be set to success"
                             }
                             
