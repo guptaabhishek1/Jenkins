@@ -125,7 +125,7 @@ pipeline {
 
                 }
            }
-    post {
+    finally {
             always{
                 echo "Thisi"
             }failure{
