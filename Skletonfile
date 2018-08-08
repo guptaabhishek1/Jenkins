@@ -1,3 +1,4 @@
+def camresult = null
 pipeline {
     agent any
 
@@ -89,8 +90,9 @@ pipeline {
                     {
                         script{
                                 // getting status of application
-                                env.camresult = buildCAModelScore()
-                                println env.camresult   
+                                //env.camresult = buildCAModelScore()
+                                camresult = buildCAModelScore()
+                                println camresult   
                         }
                      },
                     "Build Decision Handler": // Building DH APP
@@ -134,7 +136,9 @@ pipeline {
 def gen1(individualjob){
 
     echo "This is individualjob: ${individualjob}"
-    echo "${individualjob.buildStatus}"
+    println individualjob
+    
+    
     
     if (individualjob.buildStatus == "FAILURE") {
         echo "Inside FAILURE"
@@ -145,9 +149,9 @@ def gen(){
 
     def returnString = "This is test123"
     echo "${returnString}"
-    echo "${env.camresult}"
+    echo "${camresult}"
     
-    returnString = gen1(env.camresult)
+    returnString = gen1(camresult)
     echo "This is returnString ${returnString}"
     return "${returnString}"
 }
