@@ -134,9 +134,11 @@ pipeline {
 def gen1(individualjob){
 
     echo "This is individualjob : ${individualjob}"
+    echo "${individual.buildStatus}"
     
     if (individualjob.buildStatus == "FAILURE") {
-        return "${individualjob.buildUrl}"
+        echo "Inside FAILURE"
+        return individualjob.buildUrl
     }
 }
 def gen(){
