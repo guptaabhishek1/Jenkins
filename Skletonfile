@@ -128,7 +128,7 @@ pipeline {
 
                 }
            }
-        stage('Wait for User Input') {
+        stage('finally') {
             steps {
                 script {
                    
