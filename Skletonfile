@@ -128,15 +128,14 @@ pipeline {
     stage('post-build') {
         steps {
             echo "test"
-            mailtest()
+            sendAppStandupFailure()
            }
     }
  }
 }
 
-def gen1(individualjob){
-
-    echo "This is individualjob: ${individualjob}"
+def generateIndividualJobFailedHTML(individualjob){
+    // Splitting to get buildResult
     buildResult = "${individualjob}".split("=")[1].split(",")[0]
     if (buildResult == 'FAILURE'){
         buildUrl = "${individualjob}".split("=")[2].split("}")[0]
@@ -145,24 +144,20 @@ def gen1(individualjob){
     
 }
 
-def gen(){
+def generateAllFailedJobsHTML(){
 
-    def returnString = "Mail body"
-    
-    returnString = returnString + gen1(env.camresult)
-    returnString = returnString + gen1(env.decresult)
+    def returnString = "<p>Mail body<p>"
+    returnString = returnString + generateIndividualJobFailedHTML(env.camresult) + "\n"
+    returnString = returnString + generateIndividualJobFailedHTML(env.decresult) + "\n"
     return "${returnString}"
 }
 
-def mailtest(){
-    message_body = gen()
-    echo " This is inside mailtest"
+def sendAppStandupFailure(){
+    echo "Sending failed emails to build user"
+    message_body = generateAllFailedJobsHTML()
     echo "${message_body}"
 }
     
-
-
-
 // Email Notification function
 def getNotified(){
 
