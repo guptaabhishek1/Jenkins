@@ -154,8 +154,8 @@ def gen(){
     def returnString = "This is test"
     echo "${returnString}"
     returnString = returnString + gen1(result)
-    echo "${returnString)"
-    return "${returnString)"
+    echo "${returnString}"
+    return "${returnString}"
 }
 
 def mailtest(){
