@@ -146,7 +146,7 @@ def gen1(individualjob){
 
     echo "${individualjob}"
     if (individualjob.buildStatus == "FAILURE") {
-        return "${individualjob.buildUrl}
+        return "${individualjob.buildUrl}"
     }
 }
 def gen(){
