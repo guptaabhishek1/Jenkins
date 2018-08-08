@@ -140,7 +140,7 @@ def gen1(individualjob){
     def var1 = "${individualjob}"
     def buildStatus = sh(script:'echo "${var1}"|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
     def buildStatus1 = sh(script:'echo ${var1}|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
-    def buildUrl = sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
+    def buildUrl1= sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
 
     echo "${buildStatus}"
     if (buildStatus == 'FAILURE'){
