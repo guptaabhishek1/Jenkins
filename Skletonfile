@@ -125,17 +125,7 @@ pipeline {
 
                 }
            }
-        stage('test1') {
-            steps {
-                script {
-                   
-                        echo "start"
-                        mailtest()
-                        
-                        
-                }
-            }
-        }
+
  }
 }
 
