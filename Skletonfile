@@ -154,7 +154,7 @@ def gen(){
     def returnString = "This is test"
     echo "${returnString}"
   
-    returnString = returnString + gen1(env.camresult)
+    returnString = returnString + gen1("${env.camresult}")
     echo "${returnString}"
     return "${returnString}"
 }
