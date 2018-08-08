@@ -125,6 +125,7 @@ pipeline {
     stage('post-build') {
         steps {
             echo "test"
+            mailtest()
            }
     }
  }
@@ -148,6 +149,7 @@ def gen(){
 }
 
 def mailtest(){
+    echo " This is inside mailtest"
     message_body = gen()
     echo "${message_body}"
 }
