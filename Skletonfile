@@ -93,10 +93,9 @@ pipeline {
                     {
                         script{
                                 // getting status of application
-                                //env.camresult = buildCAModelScore()
-                                camresult = buildCAModelScore()
+                                env.camresult = buildCAModelScore()
                                 
-                                println camresult   
+                                println env.camresult   
                         }
                      },
                     "Build Decision Handler": // Building DH APP
@@ -141,13 +140,7 @@ def gen1(individualjob){
 
     echo "This is individualjob: ${individualjob}"
     println individualjob
-    
-    
-    
-    if (individualjob.buildStatus == "FAILURE") {
-        echo "Inside FAILURE"
-        return individualjob.buildUrl
-    }
+    return individualjob
 }
 def gen(){
 
@@ -155,7 +148,7 @@ def gen(){
     echo "${returnString}"
     echo "${camresult}"
     
-    returnString = gen1(camresult)
+    returnString = gen1(env.camresult)
     echo "This is returnString ${returnString}"
     return "${returnString}"
 }
