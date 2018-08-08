@@ -1,6 +1,9 @@
 pipeline {
     agent any
-     def camresult
+    define {
+       def my_map = [:] //empty map
+       def camresult
+     }
     stages {
        
         
