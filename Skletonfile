@@ -89,7 +89,7 @@ pipeline {
                     {
                         script{
                                 // getting status of application
-                                def env.camresult = buildCAModelScore()
+                                env.camresult = buildCAModelScore()
                                 println env.camresult
                                 if(env.camresult.buildStatus == 'FAILURE'){
                                     echo "${env.camresult.buildUrl}"
