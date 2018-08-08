@@ -128,8 +128,43 @@ pipeline {
 
                 }
            }
+        stage('Wait for User Input') {
+            steps {
+                script {
+                   
+                        echo "start"
+                        mailtest()
+                        
+                        
+                }
+            }
+        }
  }
 }
+
+def gen1(individualjob){
+
+    echo "${individualjob}"
+    if (individualjob.buildStatus == "FAILURE") {
+        return "${individualjob.buildUrl}
+    }
+}
+def gen(){
+
+    def returnString = "This is test"
+    echo "${returnString}"
+    returnString = returnString + gen1(result)
+    echo "${returnString)"
+    return "${returnString)"
+}
+
+def mailtest(){
+    message_body = gen()
+    echo "${message_body}"
+}
+    
+
+
 
 // Email Notification function
 def getNotified(){
