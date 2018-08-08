@@ -100,8 +100,9 @@ pipeline {
                         script{
  
                                 echo "buildDecisionHandler"
-                                //buildDecisionHandler()
-                                echo "buildCAModelScore Failed but job needs to be set to success"
+                                env.decresult = buildDecisionHandler()
+                                println env.decresult
+                                
                         }
                     },
                     "Build FRE": //Building FRE APP
@@ -141,18 +142,16 @@ def gen1(individualjob){
 }
 def gen(){
 
-    def returnString = "This is test123"
-    echo "${returnString}"
-    echo "${camresult}"
+    def returnString = "Mail body"
     
-    returnString = gen1(env.camresult)
-    echo "This is returnString ${returnString}"
+    returnString = returnString + gen1(env.camresult)
+    returnString = returnString + gen1(env.decresult)
     return "${returnString}"
 }
 
 def mailtest(){
-    echo " This is inside mailtest"
     message_body = gen()
+    echo " This is inside mailtest"
     echo "${message_body}"
 }
     
@@ -225,3 +224,16 @@ def buildCAModelScore() {
        return [buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 }
 
+def buildDecisionHandler() {
+       
+       build_run = build job: 'TestPipeline1', propagate: false, parameters:
+           [
+                string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
+                string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
+                string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
+                string(name: 'AZ', value: "${env.MultiAZ}")
+           ]
+
+       return [buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
+
+}
