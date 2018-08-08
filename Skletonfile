@@ -133,19 +133,20 @@ pipeline {
 
 def gen1(individualjob){
 
-    echo "${individualjob}"
+    echo "This is individualjob : ${individualjob}"
+    
     if (individualjob.buildStatus == "FAILURE") {
         return "${individualjob.buildUrl}"
     }
 }
 def gen(){
 
-    def returnString = "This is test"
+    def returnString = "This is test123"
     echo "${returnString}"
     echo "${env.camresult}"
     
     returnString = gen1("${env.camresult}")
-    echo "${returnString}"
+    echo "This is returnString ${returnString}"
     return "${returnString}"
 }
 
