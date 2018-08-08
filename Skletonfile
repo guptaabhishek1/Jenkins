@@ -1,9 +1,9 @@
-def camresult = null
 pipeline {
     agent any
 
     stages {
-
+        def camresult
+        
         stage('Parallel Infra Stage') {
             steps {
                 parallel(
@@ -92,6 +92,7 @@ pipeline {
                                 // getting status of application
                                 //env.camresult = buildCAModelScore()
                                 camresult = buildCAModelScore()
+                                
                                 println camresult   
                         }
                      },
