@@ -91,10 +91,7 @@ pipeline {
                                 // getting status of application
                                 env.camresult = buildCAModelScore()
                                 println env.camresult
-                                if(env.camresult.buildStatus == 'FAILURE'){
-                                    echo "${env.camresult.buildUrl}"
-                                    echo "buildCAModelScore Failed but job needs to be set to success"
-                                }
+                          
                             
                         }
                            
