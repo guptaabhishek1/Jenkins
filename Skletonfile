@@ -89,10 +89,10 @@ pipeline {
                     {
                         script{
                                 // getting status of application
-                                def result = buildCAModelScore()
-                                println result
-                                if(result.buildStatus == 'FAILURE'){
-                                    echo "${result.buildUrl}"
+                                def camresult = buildCAModelScore()
+                                println camresult
+                                if(camresult.buildStatus == 'FAILURE'){
+                                    echo "${camresult.buildUrl}"
                                     echo "buildCAModelScore Failed but job needs to be set to success"
                                 }
                             
