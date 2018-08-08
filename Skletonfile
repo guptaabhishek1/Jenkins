@@ -137,10 +137,14 @@ pipeline {
 def gen1(individualjob){
 
     echo "This is individualjob: ${individualjob}"
-    def buildStatus = sh(script:'echo \"${individualjob}\"|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
+    def var1 = "${individualjob}"
+    def buildStatus = sh(script:'echo "${var1}"|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
+    def buildStatus1 = sh(script:'echo ${var1}|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
+    def buildUrl = sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
+
     echo "${buildStatus}"
     if (buildStatus == 'FAILURE'){
-        def buildUrl = sh(script:'echo \"${individualjob}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
+        def buildUrl = sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
         echo "The buildUrl is ${buildUrl}"
         return buildUrl
     }
