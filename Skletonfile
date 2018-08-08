@@ -138,6 +138,11 @@ def gen1(individualjob){
 
     echo "This is individualjob: ${individualjob}"
     def var1 = "${individualjob}"
+    echo "${var1}"
+    sh """
+        echo "${var1}"
+    """
+    
     def buildStatus = sh(script:'echo "${var1}"|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
     def buildStatus1 = sh(script:'echo ${var1}|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
     def buildUrl1= sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
