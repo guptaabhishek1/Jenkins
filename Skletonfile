@@ -125,7 +125,13 @@ pipeline {
 
                 }
            }
-
+    post {
+            always{
+                echo "Thisi"
+            }failure{
+                echo "failed"
+            }
+    }
  }
 }
 
