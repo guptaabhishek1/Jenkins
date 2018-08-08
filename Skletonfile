@@ -90,11 +90,8 @@ pipeline {
                         script{
                                 // getting status of application
                                 env.camresult = buildCAModelScore()
-                                println env.camresult
-                          
-                            
+                                println env.camresult   
                         }
-                           
                      },
                     "Build Decision Handler": // Building DH APP
                     {
@@ -125,12 +122,8 @@ pipeline {
 
                 }
            }
-    finally {
-            always{
-                echo "Thisi"
-            }failure{
-                echo "failed"
-            }
+    stage('post-build') {
+            echo "test"
     }
  }
 }
