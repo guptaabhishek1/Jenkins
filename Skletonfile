@@ -137,8 +137,12 @@ pipeline {
 def gen1(individualjob){
 
     echo "This is individualjob: ${individualjob}"
-    println individualjob
-    return individualjob
+    def buildStatus = sh(script:'echo "${individualjob}"|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
+    if (buildStatus == 'FAILURE){
+        def buildUrl = sh(script:'echo "${individualjob}"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
+        echo "The buildUrl is ${buildUrl}"
+        return buildUrl
+    }
 }
 def gen(){
 
