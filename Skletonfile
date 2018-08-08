@@ -137,23 +137,14 @@ pipeline {
 def gen1(individualjob){
 
     echo "This is individualjob: ${individualjob}"
-    def var1 = "${individualjob}".split("=")[1].split(",")[0]
-    echo "${var1}"
-    sh """
-        echo "${var1}"
-    """
-    
-    def buildStatus = sh(script:'echo ${var1}"|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true)
-    def buildStatus1 = sh(script:'echo ${var1}|cut -d "=" -f2 |cut -d "," -f1', returnStdout: true).trim()
-    def buildUrl1= sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
-
-    echo "${buildStatus}"
-    if (buildStatus == 'FAILURE'){
-        def buildUrl = sh(script:'echo \"${var1}\"|cut -d "=" -f3|cut -d "}" -f1', returnStdout: true).trim()
-        echo "The buildUrl is ${buildUrl}"
+    buildResult = "${individualjob}".split("=")[1].split(",")[0]
+    if (buildResult == 'FAILURE"){
+        buildUrl = "${individualjob}".split("=")[2].split("}")[0]
         return buildUrl
     }
+    
 }
+
 def gen(){
 
     def returnString = "Mail body"
