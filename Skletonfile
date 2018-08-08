@@ -1,8 +1,8 @@
 pipeline {
     agent any
-
+     def camresult
     stages {
-        def camresult
+       
         
         stage('Parallel Infra Stage') {
             steps {
