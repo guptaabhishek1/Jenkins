@@ -127,7 +127,7 @@ pipeline {
         steps {
             script { echo "test"
             sendAppStandupFailure()
-            currentBuild.result = 'UNSTABLE'
+            
             }
            }
     }
@@ -139,6 +139,7 @@ def generateIndividualJobFailedHTML(individualjob){
     buildResult = "${individualjob}".split("=")[1].split(",")[0]
     if (buildResult == 'FAILURE'){
         buildUrl = "${individualjob}".split("=")[2].split("}")[0]
+        currentBuild.result = 'UNSTABLE'
         return buildUrl
     }
     
