@@ -157,11 +157,11 @@ def sendAppStandupFailure(){
     echo "Sending failed emails to build user"
     message_body = generateAllFailedJobsHTML()
     echo "${message_body}"
-    if (message_body.contains("https")) {
+    if (message_body.contains("abhishek")) {
         echo "this is inside failure"
     }
     
-    if (message_body.contains("abhishek")) {
+    if (message_body.contains("https")) {
         echo "this is inside success"
     }
 }
