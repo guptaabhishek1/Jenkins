@@ -125,10 +125,10 @@ pipeline {
            }
     stage('post-build') {
         steps {
-            echo "test"
+            script { echo "test"
             sendAppStandupFailure()
             currentBuild.result = 'UNSTABLE'
-            
+            }
            }
     }
  }
