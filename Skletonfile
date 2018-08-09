@@ -127,7 +127,7 @@ pipeline {
         steps {
             echo "test"
             sendAppStandupFailure()
-            def currentBuild.result = "UNSTABLE"
+            currentBuild.result = 'UNSTABLE'
             
            }
     }
