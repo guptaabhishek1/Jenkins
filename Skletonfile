@@ -92,6 +92,11 @@ pipeline {
                                 // getting status of application
                                 env.camresult = buildCAModelScore()
                                 echo "${env.camresult}"
+                                def buildNumber = "${env.camresult}".split("=")[1].split(",")[0]
+                                def buildStatus = "${env.camresult}".split("=")[2].split(",")[0]
+                                echo "${buildNumber}"
+                                echo "${buildStatus}"
+                                
                                 if (env.userid == ""){
                                     echo "userid is empty"
                                 }
