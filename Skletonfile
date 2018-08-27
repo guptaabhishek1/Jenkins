@@ -91,6 +91,10 @@ pipeline {
                         script{
                                 // getting status of application
                                 env.camresult = buildCAModelScore()
+                                echo "${env.camresult}"
+                                if (env.userid == ""){
+                                    echo "userid is empty"
+                                }
                                
                         }
                      },
@@ -99,7 +103,7 @@ pipeline {
                         script{
  
                                 echo "buildDecisionHandler"
-                                env.decresult = buildDecisionHandler()
+                                //env.decresult = buildDecisionHandler()
                                 
                         }
                     },
@@ -229,7 +233,7 @@ def buildCAModelScore() {
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
 
-       return [buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
+       return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 }
 
 def buildDecisionHandler() {
@@ -242,6 +246,6 @@ def buildDecisionHandler() {
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
 
-       return [buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
+       return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 
 }
