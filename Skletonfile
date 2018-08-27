@@ -94,8 +94,10 @@ pipeline {
                                 echo "${env.camresult}"
                                 def buildNumber = "${env.camresult}".split("=")[1].split(",")[0]
                                 def buildStatus = "${env.camresult}".split("=")[2].split(",")[0]
+                                def buildUrl = "${env.camresult}".split("=")[3].split(",")[0]
                                 echo "${buildNumber}"
                                 echo "${buildStatus}"
+                                echo "${buildUrl}"
                                 
                                 if (env.userid == ""){
                                     echo "userid is empty"
