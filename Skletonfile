@@ -241,6 +241,7 @@ def buildCAModelScore() {
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
+      sleep(10)
       echo "${build_run}"
       //httpRequest url: 'https://jenkins.aximglobal.com/job/TestJenkinsFile/api/json', outputFile: 'output.json'
       //def jsonFile = readFile(file: 'output.json')
