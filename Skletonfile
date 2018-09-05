@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurperClassic
+
 pipeline {
     agent any
     
@@ -240,9 +242,10 @@ def buildCAModelScore() {
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
       echo "${build_run}"
-      def job = Jenkins.instance.getItemByFullName('TestPipeline1')
-      def build = job.getLastBuild()
-      echo "${build}"
+      httpRequest url: 'https://jenkins.aximglobal.com/job/TestJenkinsFile/api/json', outputFile: 'output.json'
+      def jsonFile = readFile(file: 'output.json')
+      def data = new JsonSlurperClassic().parseText(jsonFile)
+      echo "${data}"
       return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 }
 
