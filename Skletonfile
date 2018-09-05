@@ -245,9 +245,10 @@ def buildCAModelScore() {
       //sleep(10)
       httpRequest authentication: 'JenkinsID' , url: 'https://jenkins.aximglobal.com/job/TestPipeline1/api/json?pretty=true', outputFile: 'output.json'
       def jsonFile = readFile(file: 'output.json')
-      def data = new JsonSlurper().parseText(jsonFile).builds[0][url]
+      def data = new JsonSlurper().parseText(jsonFile)
       echo "${data}"
-      //env.perfBuildNumber = "${data.builds[0][url]}"
+      env.perfBuildNumber = "${data.builds[0][url]}"
+      echo "${env.perfBuildNumber}"
       //env.PerfbuildUrl = Jenkins.instance.getItem('TestPipeline1').lastBuild.absoluteUrl
       //echo "${env.PerfbuildUrl}"
       //return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
