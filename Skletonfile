@@ -234,20 +234,21 @@ def buildHazelCastInfra() {
 
 def buildCAModelScore() {
        
-       build_run = build job: 'TestPipeline1', propagate: true, quietPeriod: 3, wait:false, parameters:
+       /** build_run = build job: 'TestPipeline1', propagate: true, quietPeriod: 3, wait:false, parameters:
            [
                 string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
                 string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
-           ]
-      sleep(10)
+           ]*/
+           
+      //sleep(10)
       echo "${build_run}"
       httpRequest authentication: 'JenkinsID' , url: 'https://jenkins.aximglobal.com/job/TestPipeline1/api/json?pretty=true', outputFile: 'output.json'
       def jsonFile = readFile(file: 'output.json')
-      echo "${jsonFile}"
+      //echo "${jsonFile}"
       def data = new JsonSlurper().parseText(jsonFile)
-      echo "${data}"
+      echo "${data.builds}"
       env.PerfbuildUrl = Jenkins.instance.getItem('TestPipeline1').lastBuild.absoluteUrl
       echo "${env.PerfbuildUrl}"
       //return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
