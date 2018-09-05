@@ -234,7 +234,7 @@ def buildHazelCastInfra() {
 
 def buildCAModelScore() {
        
-       build_run = build job: 'TestPipeline1', propagate: true, wait:false, parameters:
+       build_run = build job: 'TestPipeline1', propagate: true, quietPeriod: 3, wait:false, parameters:
            [
                 string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
                 string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
@@ -247,7 +247,7 @@ def buildCAModelScore() {
       //def jsonFile = readFile(file: 'output.json')
       //def data = new JsonSlurperClassic().parseText(jsonFile)
       //echo "${data}"
-      def buildNumber = Jenkins.instance.getItem('TestPipeline1').lastBuild
+      def buildNumber = Jenkins.instance.getItem('TestPipeline1')
       echo "${buildNumber}"
       //return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 }
