@@ -247,7 +247,7 @@ def buildCAModelScore() {
       def jsonFile = readFile(file: 'output.json')
       def data = new JsonSlurper().parseText(jsonFile)
       //echo "${data}"
-      env.perfBuildNumber = "${data.builds[0]}".split(",")[2].split("]")[0].url(":")[1]
+      env.perfBuildNumber = "${data.builds[0]}".split(",")[2].split("]")[0].split(":")[1]
       echo "${env.perfBuildNumber}"
       //env.PerfbuildUrl = Jenkins.instance.getItem('TestPipeline1').lastBuild.absoluteUrl
       //echo "${env.PerfbuildUrl}"
