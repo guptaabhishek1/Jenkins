@@ -242,10 +242,12 @@ def buildCAModelScore() {
                 string(name: 'AZ', value: "${env.MultiAZ}")
            ]
       echo "${build_run}"
-      httpRequest url: 'https://jenkins.aximglobal.com/job/TestJenkinsFile/api/json', outputFile: 'output.json'
-      def jsonFile = readFile(file: 'output.json')
-      def data = new JsonSlurperClassic().parseText(jsonFile)
-      echo "${data}"
+      //httpRequest url: 'https://jenkins.aximglobal.com/job/TestJenkinsFile/api/json', outputFile: 'output.json'
+      //def jsonFile = readFile(file: 'output.json')
+      //def data = new JsonSlurperClassic().parseText(jsonFile)
+      //echo "${data}"
+      def buildNumber = Jenkins.instance.getItem('TestPipeline1').lastSuccessfulBuild.number
+      echo "${buildNumber}"
       return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
 }
 
