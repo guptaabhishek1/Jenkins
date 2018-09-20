@@ -5,12 +5,32 @@ pipeline
 {
   agent any
   stages {        
-    stage('Cleanup') {
+    stage('Serial') {
+      when {
+                expression { params.Enviroment == 'dev' }
+      }
       steps{
         script{
           println "Serial Stage"
         
         }
+      }
+    }
+    stage('ParallelMultiAZ') {
+      when {
+            expression { params.Enviroment == 'qa' }
+      }
+      steps{
+        parallel(
+          "MultiAZ1": {
+            script{
+              println "Parallel Stage1"
+            }
+          },
+          "MUltiAz2": {
+            println "Parallel Stage2"
+          },
+      )
       }
     }
   }
