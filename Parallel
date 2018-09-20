@@ -1,6 +1,6 @@
 import hudson.model.User
 import groovy.json.JsonSlurper
-import groovy.json.JsonOutput 
+import groovy.json.JsonOutput
 pipeline 
 {
   stages {        
