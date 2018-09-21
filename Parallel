@@ -16,6 +16,11 @@ pipeline
           echo "${Tst}"
           Tst1 = "${env.MultiAZ}".split("-")[1].toLowerCase().capitalize()
           echo "${Tst1}"
+          
+          durationInSeconds = (params.HoursToRun.toInteger() * 3600).toString()
+          halfDurationInSeconds = (durationInSeconds.toInteger().div(2)).toString()
+          echo "${halfDurationInSeconds}"
+          echo "${durationInSeconds}"
         
         }
       }
