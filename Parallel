@@ -21,6 +21,7 @@ pipeline
           halfDurationInSeconds = (durationInSeconds.toInteger().div(2)).toString()
           echo "${halfDurationInSeconds}"
           echo "${durationInSeconds}"
+          sleep(halfDurationInSeconds)
         
         }
       }
