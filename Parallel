@@ -12,6 +12,8 @@ pipeline
       steps{
         script{
           println "Serial Stage"
+          Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
+          echo "${Tst}"
         
         }
       }
