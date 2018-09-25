@@ -36,7 +36,8 @@ pipeline
           "MultiAZ1": {
             script{
               println "Parallel Stage1"
-              parameters1("${env.AZ}", "${env.TargetCluster_Deployment}")
+              //parameters1("${env.AZ}", "${env.TargetCluster_Deployment}")
+              parameters1(env.AZ, env.TargetCluster_Deployment)
               echo "${env.Tst}"
               echo "${env.Region}"
               echo "${env.AZ1}"
@@ -45,7 +46,8 @@ pipeline
           "MUltiAz2": {
             println "Parallel Stage2"
             sleep(30)
-            parameters1("${env.MultiAZ}", "${env.TargetCluster_Deployment}")
+            //parameters1("${env.MultiAZ}", "${env.TargetCluster_Deployment}")
+            parameters1(env.MultiAZ, env.TargetCluster_Deployment)
             echo "${env.Tst}"
             echo "${env.Region}"
             echo "${env.AZ1}"
