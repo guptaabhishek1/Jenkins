@@ -12,16 +12,17 @@ pipeline
       steps{
         script{
           println "Serial Stage"
-          Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
-          echo "${Tst}"
-          Tst1 = "${env.MultiAZ}".split("-")[1].toLowerCase().capitalize()
-          echo "${Tst1}"
+          //Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
+          parameters(AZ)
+          echo "${env.Tst}"
+          //Tst1 = "${env.MultiAZ}".split("-")[1].toLowerCase().capitalize()
+          //echo "${Tst1}"
           
           durationInSeconds = (params.HoursToRun.toInteger() * 3600).toString()
           halfDurationInSeconds = (durationInSeconds.toInteger().div(2)).toString()
           echo "${halfDurationInSeconds}"
           echo "${durationInSeconds}"
-          sleep(halfDurationInSeconds.toInteger())
+          //sleep(halfDurationInSeconds.toInteger())
         
         }
       }
@@ -35,13 +36,20 @@ pipeline
           "MultiAZ1": {
             script{
               println "Parallel Stage1"
+              parameters(AZ)
             }
           },
           "MUltiAz2": {
             println "Parallel Stage2"
+            parameters(env.MultiAZ)
+            echo "${env.Tst}"
           },
       )
       }
     }
   }
-}               
+}
+
+def parameters(AZ){
+  env.Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
+  }
