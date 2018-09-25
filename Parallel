@@ -20,8 +20,8 @@ pipeline
           
           durationInSeconds = (params.HoursToRun.toInteger() * 3600).toString()
           halfDurationInSeconds = (durationInSeconds.toInteger().div(2)).toString()
-          echo "${halfDurationInSeconds}"
-          echo "${durationInSeconds}"
+          //echo "${halfDurationInSeconds}"
+          //echo "${durationInSeconds}"
           //sleep(halfDurationInSeconds.toInteger())
         
         }
