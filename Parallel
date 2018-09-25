@@ -36,7 +36,7 @@ pipeline
           "MultiAZ1": {
             script{
               println "Parallel Stage1"
-              parameters("${env.AZ}", "${env.TargetCluster_Deployment}")
+              parameters1("${env.AZ}", "${env.TargetCluster_Deployment}")
               echo "${env.Tst}"
               echo "${env.Region}"
               echo "${env.AZ1}"
@@ -56,7 +56,7 @@ pipeline
   }
 }
 
-def parameters(AZ, Deploy){
+def parameters1(AZ, Deploy){
   env.Tst = "${AZ}".split("-")[1].toLowerCase().capitalize()
   env.Region = "${Deploy[0..-2]}"
   env.AZ1 = "this is test"
