@@ -234,21 +234,22 @@ def buildHazelCastInfra() {
 
 def buildCAModelScore() {
        
-       /** build_run = build job: 'TestPipeline1', propagate: true, quietPeriod: 3, wait:false, parameters:
-           [
-                string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
+      build_run = build job: 'TestPipeline1', propagate: false, quietPeriod: 300, wait:false, 
+      parameters:
+      [
+          string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
                 string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
                 string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
                 string(name: 'AZ', value: "${env.MultiAZ}")
-           ]*/
+      ]
            
       //sleep(10)
-      httpRequest authentication: 'JenkinsID' , url: 'https://jenkins.aximglobal.com/job/TestPipeline1/api/json?pretty=true', outputFile: 'output.json'
-      def jsonFile = readFile(file: 'output.json')
-      def data = new JsonSlurper().parseText(jsonFile)
+      //httpRequest authentication: 'JenkinsID' , url: 'https://jenkins.aximglobal.com/job/TestPipeline1/api/json?pretty=true', outputFile: 'output.json'
+      //def jsonFile = readFile(file: 'output.json')
+      //def data = new JsonSlurper().parseText(jsonFile)
       //echo "${data}"
-      env.perfBuildNumber = "${data.builds[0]}".split(",")[2].split("]")[0].split("url:")[1]
-      echo "${env.perfBuildNumber}"
+      //env.perfBuildNumber = "${data.builds[0]}".split(",")[2].split("]")[0].split("url:")[1]
+      //echo "${env.perfBuildNumber}"
       //env.PerfbuildUrl = Jenkins.instance.getItem('TestPipeline1').lastBuild.absoluteUrl
       //echo "${env.PerfbuildUrl}"
       //return [buildNumber: "${build_run.number}", buildStatus:"${build_run.result}", buildUrl:"${build_run.absoluteUrl}"]
