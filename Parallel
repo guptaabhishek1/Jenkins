@@ -13,7 +13,7 @@ pipeline
         script{
           println "Serial Stage"
           //Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
-          parameters(env.AZ)
+          parameters(env.AZ, env.TargetCluster_Deployment)
           echo "${env.Tst}"
           //Tst1 = "${env.MultiAZ}".split("-")[1].toLowerCase().capitalize()
           //echo "${Tst1}"
@@ -36,15 +36,19 @@ pipeline
           "MultiAZ1": {
             script{
               println "Parallel Stage1"
-              parameters(AZ)
+              parameters(env.AZ, env.TargetCluster_Deployment, "Test1")
               echo "${env.Tst}"
+              echo "${env.Region}"
+              echo "${env.AZ1}"
             }
           },
           "MUltiAz2": {
             println "Parallel Stage2"
             sleep(30)
-            parameters(env.MultiAZ)
+            parameters(env.MultiAZ,env.TargetCluster_Deployment, "Test2")
             echo "${env.Tst}"
+            echo "${env.Region}"
+            echo "${env.AZ1}"
           },
       )
       }
@@ -52,6 +56,9 @@ pipeline
   }
 }
 
-def parameters(AZ){
+def parameters(AZ, Deploy, Test){
   env.Tst = "${AZ}".split("-")[1].toLowerCase().capitalize()
+  env.Region = "${Deploy[0..-2]}"
+  env.AZ1 = "this is test"
+  
   }
