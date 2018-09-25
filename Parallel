@@ -69,7 +69,7 @@ def parameters1(AZ, Deploy){
   
   def buildCAModelScore() {
        
-      build_run = build job: 'TestPipeline1', propagate: false, quietPeriod: "${env.halfDurationInSeconds}", wait:false, 
+      build_run = build job: 'TestPipeline1', propagate: false, quietPeriod: "${env.halfDurationInSeconds.toInteger()}", wait:false, 
       parameters:
       [
           string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
