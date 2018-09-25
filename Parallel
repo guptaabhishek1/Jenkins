@@ -12,17 +12,19 @@ pipeline
       steps{
         script{
           println "Serial Stage"
-          //Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
-          parameters(env.AZ, env.TargetCluster_Deployment)
-          echo "${env.Tst}"
+          
+          //parameters(env.AZ, env.TargetCluster_Deployment)
+          //echo "${env.Tst}"
           //Tst1 = "${env.MultiAZ}".split("-")[1].toLowerCase().capitalize()
           //echo "${Tst1}"
           
           durationInSeconds = (params.HoursToRun.toInteger() * 3600).toString()
-          halfDurationInSeconds = (durationInSeconds.toInteger().div(2)).toString()
+          env.halfDurationInSeconds = (durationInSeconds.toInteger().div(2)).toString()
           //echo "${halfDurationInSeconds}"
           //echo "${durationInSeconds}"
           //sleep(halfDurationInSeconds.toInteger())
+          
+          buildCAModelScore()
         
         }
       }
@@ -64,3 +66,15 @@ def parameters1(AZ, Deploy){
   env.AZ1 = "this is test"
   
   }
+  
+  def buildCAModelScore() {
+       
+      build_run = build job: 'TestPipeline1', propagate: false, quietPeriod: "${env.halfDurationInSeconds}", wait:false, 
+      parameters:
+      [
+          string(name: 'Deployment_Location', value: "${env.Enviroment},${env.AZ}"),
+                string(name: 'TargetCluster_Deployment', value: "${env.TargetCluster_Deployment}"),
+                string(name: 'Cluster_Type', value: "${env.Cluster_Type}"),
+                string(name: 'AZ', value: "${env.MultiAZ}")
+      ]
+   }
