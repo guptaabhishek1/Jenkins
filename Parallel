@@ -37,6 +37,7 @@ pipeline
             script{
               println "Parallel Stage1"
               parameters(AZ)
+              echo "${env.Tst}"
             }
           },
           "MUltiAz2": {
