@@ -13,7 +13,7 @@ pipeline
         script{
           println "Serial Stage"
           //Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
-          parameters(AZ)
+          parameters(env.AZ)
           echo "${env.Tst}"
           //Tst1 = "${env.MultiAZ}".split("-")[1].toLowerCase().capitalize()
           //echo "${Tst1}"
@@ -41,6 +41,7 @@ pipeline
           },
           "MUltiAz2": {
             println "Parallel Stage2"
+            sleep(30)
             parameters(env.MultiAZ)
             echo "${env.Tst}"
           },
