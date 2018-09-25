@@ -45,7 +45,7 @@ pipeline
           "MUltiAz2": {
             println "Parallel Stage2"
             sleep(30)
-            parameters(env.MultiAZ,env.TargetCluster_Deployment, "Test2")
+            parameters(env.MultiAZ, env.TargetCluster_Deployment, "Test2")
             echo "${env.Tst}"
             echo "${env.Region}"
             echo "${env.AZ1}"
