@@ -53,5 +53,5 @@ pipeline
 }
 
 def parameters(AZ){
-  env.Tst = "${env.AZ}".split("-")[1].toLowerCase().capitalize()
+  env.Tst = "${AZ}".split("-")[1].toLowerCase().capitalize()
   }
