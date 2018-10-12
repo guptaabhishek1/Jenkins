@@ -1,21 +1,10 @@
-import boto3
+#import boto3
 import sys
 
 def updateDeathTimeAsg(asgIDs):
-    client = boto3.client('autoscaling')
+    #client = boto3.client('autoscaling')
     for asg in asgIDs.split(","):
         print asg
-        response = client.create_or_update_tags(
-            Tags=[
-                {
-                    'ResourceId': asg,
-                    'ResourceType': 'auto-scaling-group',
-                    'Key': 'DeathTime',
-                    'Value': '20180928',
-                    'PropagateAtLaunch': True
-                }]
-            )
-        print response
 
 if __name__ == "__main__":
 
