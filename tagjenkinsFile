@@ -10,7 +10,7 @@ pipeline
         script{
           echo "${params.InstanceId}"
           if (params.InstanceId){
-            python IntanceTag.py params.InstanceId
+            python DeathTimeTag.py params.InstanceId params.AutoScalingGroupId
           }
           //for (asg in params.ASGId.split(",")) {
           //  echo "${ASG}"
