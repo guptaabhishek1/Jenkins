@@ -10,9 +10,7 @@ pipeline
         script{
           echo "${params.InstanceId}"
           if (params.InstanceId){
-            for (instance in params.InstanceId.split(",")) {
-              echo "${instance}" 
-            }
+            python IntanceTag.py params.InstanceId
           }
           //for (asg in params.ASGId.split(",")) {
           //  echo "${ASG}"
