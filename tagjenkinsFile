@@ -4,7 +4,12 @@ import groovy.json.JsonOutput
 pipeline 
 {
   agent any
-  stages {        
-  
-  }
+  stage('TagEC2Resources') {
+    
+      steps{
+        script{
+          echo " this is test"
+        }
+      }
+    }
 }
