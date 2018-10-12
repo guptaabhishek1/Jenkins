@@ -9,7 +9,7 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
-          for (instance in params.InstanceId.split(,)) {
+          for (instance in params.InstanceId.split(",")) {
             echo "${instance}"
           }
         }
