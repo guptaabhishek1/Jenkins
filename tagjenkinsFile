@@ -9,6 +9,9 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
+          for (instance in params.InstanceId) {
+            echo "${instance}"
+          }
         }
       }
     }
