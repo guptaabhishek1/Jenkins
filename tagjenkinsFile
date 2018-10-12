@@ -9,9 +9,14 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
-          for (instance in params.InstanceId.split(",")) {
-            echo "${instance}"
+          if (params.InstanceId){
+            for (instance in params.InstanceId.split(",")) {
+              echo "${instance}" 
+            }
           }
+          //for (asg in params.ASGId.split(",")) {
+          //  echo "${ASG}"
+          //}
         }
       }
     }
