@@ -8,7 +8,7 @@ pipeline
     stage('TagEC2Resources') {
       steps{
         script{
-          echo " this is test"
+          echo "${params.InstanceId}"
         }
       }
     }
