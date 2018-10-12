@@ -9,12 +9,14 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
-          //if (params.InstanceId){
+          if (! params.InstanceId){
+            params.InstanceId = "None"
+          }
+          if (! params.AutoScalingGroupId){
+            params.AutoScalingGroupId = "None"
+          }
+          //calling python script
           sh "python DeathTimeTag.py ${params.InstanceId} ${params.AutoScalingGroupId}"
-          //}
-          //for (asg in params.ASGId.split(",")) {
-          //  echo "${ASG}"
-          //}
         }
       }
     }
