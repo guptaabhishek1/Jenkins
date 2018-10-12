@@ -1,6 +1,3 @@
-import hudson.model.User
-import groovy.json.JsonSlurper
-import groovy.json.JsonOutput
 pipeline 
 {
   agent any
@@ -8,22 +5,19 @@ pipeline
     stage('TagEC2Resources') {
       steps{
         script{
-          echo "${params.InstanceId}"
           InstanceIds = params.InstanceId
           AutoScalingIds = params.AutoScalingGroupId
+          
+          // if InstanceId or AutoScalingGroup is empty , assigning None
           if (params.InstanceId == ""){
-            echo "Inside if block"
             InstanceIds = "None"
-            echo "${InstanceIds}"
           }
-        
           if (params.AutoScalingGroupId == ""){
-            echo "Inside ASG If block"
             AutoScalingIds = "None"
           }
           
           //calling python script
-          sh "python DeathTimeTag.py ${InstanceIds} ${AutoScalingIds}"
+          sh "python DeathTimeTag.py ${InstanceIds} ${AutoScalingIds} ${params.DeathTime}"
         }
       }
     }
