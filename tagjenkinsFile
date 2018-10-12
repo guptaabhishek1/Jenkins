@@ -9,12 +9,15 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
-          if (params.InstanceId.toString() == "" ){
+          if (params.InstanceId == null ){
+            echo "Inside if block"
             params.InstanceId = "None"
             echo "${params.InstanceId}"
           }
           if (params.AutoScalingGroupId == null){
+            echo "Inside ASG If block"
             params.AutoScalingGroupId = "None"
+            echo "${params.AutoScalingGroupId}"
           }
           //calling python script
           sh "python DeathTimeTag.py ${params.InstanceId} ${params.AutoScalingGroupId}"
