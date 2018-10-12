@@ -1,0 +1,10 @@
+import hudson.model.User
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+pipeline 
+{
+  agent any
+  stages {        
+  
+  }
+}
