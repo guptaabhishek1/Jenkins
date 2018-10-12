@@ -9,8 +9,9 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
-          if (params.InstanceId == null ){
+          if (params.InstanceId.toString() == "" ){
             params.InstanceId = "None"
+            echo "${params.InstanceId}"
           }
           if (params.AutoScalingGroupId == null){
             params.AutoScalingGroupId = "None"
