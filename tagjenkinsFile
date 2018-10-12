@@ -9,18 +9,21 @@ pipeline
       steps{
         script{
           echo "${params.InstanceId}"
+          InstanceIds = params.InstanceId
+          AutoScalingIds = params.AutoScalingGroupId
           if (params.InstanceId == ""){
             echo "Inside if block"
-            params.InstanceId = "None"
-            echo "${params.InstanceId}"
+            InstanceIds = "None"
+            echo "${InstanceIds}"
           }
-          if (params.AutoScalingGroupId != null){
+        
+          if (params.AutoScalingGroupId == ""){
             echo "Inside ASG If block"
-            params.AutoScalingGroupId = "None"
-            echo "${params.AutoScalingGroupId}"
+            AutoScalingIds = "None"
           }
+          
           //calling python script
-          sh "python DeathTimeTag.py ${params.InstanceId} ${params.AutoScalingGroupId}"
+          sh "python DeathTimeTag.py ${InstanceIds} ${AutoScalingIds}"
         }
       }
     }
