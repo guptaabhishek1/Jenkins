@@ -2,7 +2,8 @@ import boto3
 import sys
 
 def updateDeathTimeAsg(asgIDs, deathTime):
-    client = boto3.client('autoscaling')
+    client = boto3.session('autoscaling')
+    #client = boto3.client('autoscaling')
     invalid_asg = ""
     #invalid_asg = []
     for asg in asgIDs.split(","):
@@ -28,7 +29,8 @@ def updateDeathTimeAsg(asgIDs, deathTime):
             
 
 def updateDeathTimeInstance(instanceIDs, deathTime):
-    client = boto3.client('ec2')
+    client = boto3.session('ec2')
+    #client = boto3.client('ec2')
     invalid_instances = ""
     #invalid_instances = []
     for instance in instanceIDs.split(","):
@@ -52,11 +54,21 @@ def updateDeathTimeInstance(instanceIDs, deathTime):
 
 if __name__ == "__main__":
     
+    sts = boto3.client('sts')
+    response = sts.assume_role(RoleArn='rolearn',RoleSessionName='TP')
+    credentials = response['Credentials']
+
+    session = boto3.Session(aws_access_key_id=credentials['AccessKeyId'],
+        aws_secret_access_key=credentials['SecretAccessKey'],
+        aws_session_token=credentials['SessionToken'],region_name='us-east-1'
+    )
+
     # Assigning null values to prevent failures
     invalid_InstancesEast = ""
     invalid_InstancesWest = ""
     invalid_ASGsEast = ""
     invalid_ASGsWest = ""
+
     # try for east region first
     print("#################################################")
     if sys.argv[1] == "None" or sys.argv[1] == "":
@@ -73,6 +85,12 @@ if __name__ == "__main__":
         invalid_ASGsEast = updateDeathTimeAsg(sys.argv[2], sys.argv[3])
     print("#################################################")
 
+    print "---------West----------"
+    session = boto3.Session(aws_access_key_id=credentials['AccessKeyId'],
+        aws_secret_access_key=credentials['SecretAccessKey'],
+        aws_session_token=credentials['SessionToken'],region_name='us-west-2'
+    )
+
     if invalid_InstancesEast:
         # Trying for west region for failed instances if any
         print("Trying for west region to check  for failed instances in east")
@@ -85,7 +103,6 @@ if __name__ == "__main__":
         invalid_ASGsWest = updateDeathTimeAsg(invalid_ASGsEast, sys.argv[3])
         print("#################################################")
 
-    # To ensure that file is not appended if  invalid_InstancesWest is empty , therefore adding an or conditon 
     if invalid_InstancesWest or invalid_ASGsWest:
         emailFile = open("FailedInstanceData","w")
         emailFile.write("<br><b>Follwing Instances Could not be found in East or West Region:</b></br><br>%s</br>" %invalid_InstancesWest)
