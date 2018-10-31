@@ -7,6 +7,6 @@
 	},
 	"FraudRulesEngine": {
 		"InfrastructureVersion": "cerb-fre-3.0.12",
-		"User Notes": "This is test for FraudRulesEngine "
+		"Notes": "This is test for FraudRulesEngine "
 	}
 }
