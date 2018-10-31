@@ -1,22 +1,12 @@
 {
+	BuildStatus: "Success",
+	BuildUrl: "https://jenkins.com/NPAR/",
 	"EventProcessor": {
-		"JarVersion": "02.00.00.448",
-		"InfrastructureVersion": "N/A",
-		"Deployed as part of this release": "yes"
-	},
-	"DecisionHandler": {
-		"JarVersion": "03.00.00.05",
-		"InfrastructureVersion": "cerb-dh-1.2.6",
-		"Deployed as part of this release": "yes"
-	},
-	"RabbitMQ": {
-		"JarVersion": "N/A",
-		"InfrastructureVersion": "cerb-rmq-1.2.4",
-		"Deployed as part of this release": "yes"
+		"InfrastructureVersion": "1.0.0.0",
+		"Notes": "This is for EventProcessor"
 	},
 	"FraudRulesEngine": {
-		"JarVersion": "01.00.00.110",
 		"InfrastructureVersion": "cerb-fre-3.0.12",
-		"Deployed as part of this release": "yes"
+		"User Notes": "This is test for FraudRulesEngine "
 	}
 }
