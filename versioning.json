@@ -1,6 +1,6 @@
 {
-	BuildStatus: "Success",
-	BuildUrl: "https://jenkins.com/NPAR/",
+	"BuildStatus": "Success",
+	"BuildUrl": "https://jenkins.com/NPAR/",
 	"EventProcessor": {
 		"InfrastructureVersion": "1.0.0.0",
 		"Notes": "This is for EventProcessor"
