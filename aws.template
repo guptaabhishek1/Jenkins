@@ -9,11 +9,11 @@
       {
         "Ref": "Region"
       },
-			", slice:",
-			{
+      ", slice:",
+      {
         "Ref": "SliceNumber"
       },
-			">> /etc/dd-agent/datadog.conf"
+      ">> /etc/dd-agent/datadog.conf"
 			
     ]
   ]
