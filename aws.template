@@ -1,0 +1,20 @@
+{
+  "Fn::Join": [
+    "", [
+      "echo tag:ibmmq, env:",
+      {
+        "Ref": "Environment"
+      },
+      ", region:",
+      {
+        "Ref": "Region"
+      },
+			", slice:",
+			{
+        "Ref": "SliceNumber"
+      },
+			">> /etc/dd-agent/datadog.conf"
+			
+    ]
+  ]
+}
