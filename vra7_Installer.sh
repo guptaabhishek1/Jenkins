@@ -6,10 +6,10 @@ export GOROOT=/usr/local/go
 
 ### Initializing the terraform rc files
 
-mkdir TerraformPluginProject
+mkdir -p TerraformPluginProject/bin/
 echo "providers { "> ~/.terraformrc
 echo 'vra7 = "/home/dc-user/TerraformPluginProject/bin/terraform-provider-vra7" ' >>~/.terraformrc
-} >>~/.terraformrc
+echo "}" >>~/.terraformrc
 
 
 ### To get the terraform latest package
@@ -29,7 +29,7 @@ fi
 
 wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz >/dev/null
 tar -xvf go1.11.2.linux-amd64.tar.gz >/dev/null
-sudo cp go/bin/go /usr/bin 
+sudo cp go/bin/go /usr/bin/
 sudo mv go /usr/local/
 
 ### check if go is installed 
@@ -42,7 +42,7 @@ fi
 
 ### Install dep package
 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-sudo mv dep /usr/bin/
+sudo mv TerraformPluginProject/bin/dep /usr/bin/
 
 if ! which dep >/dev/null
 then 
