@@ -56,6 +56,7 @@ cd src/github.com/vmware/terraform-provider-vra7/
 dep ensure
 go build
 sudo cp terraform-provider-vra7 /home/dc-user/TerraformPluginProject/bin/
+sudo cp terraform-provider-vra7 /usr/local/bin/
 
 if ! which terraform-provider-vra7  >/dev/null
 then 
