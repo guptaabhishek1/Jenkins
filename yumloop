@@ -1,0 +1,18 @@
+retry=1
+while true
+do 
+	if [ $retry -le 3 ]
+	then
+		rpm -qa|grep -qw java
+		if [ $? -eq 1 ]
+		then 
+			retry=`expr $retry + 1`
+			echo $retry
+			continue
+		else 
+			break
+		fi
+	else
+		break
+	fi
+done
