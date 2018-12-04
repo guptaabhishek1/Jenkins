@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 export GOPATH=/home/dc-user/TerraformPluginProject
@@ -30,6 +29,7 @@ fi
 wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz >/dev/null
 tar -xvf go1.11.2.linux-amd64.tar.gz >/dev/null
 sudo cp go/bin/go /usr/bin/
+sudo rm -rf /usr/local/go/
 sudo mv go /usr/local/
 
 ### check if go is installed 
@@ -41,7 +41,7 @@ then
 fi
 
 ### Install dep package
-curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | shi >/dev/null
 sudo mv TerraformPluginProject/bin/dep /usr/bin/
 
 if ! which dep >/dev/null
@@ -51,8 +51,9 @@ then
 fi
 
 cd TerraformPluginProject
-go get github.com/vmware/terraform-provider-vra7
-cd src/github.com/vmware/terraform-provider-vra7/
+go get github.com/vmware/terraform-provider-vra7 >/dev/null
+cd src/github.com/vmware/terraform-provider-vra7/ >/dev/null
+git checkout 13687d8731a6b4c637bd01fe5bbe1e6cbad39203 >/dev/null
 dep ensure
 go build
 sudo cp terraform-provider-vra7 /home/dc-user/TerraformPluginProject/bin/
@@ -62,4 +63,8 @@ if ! which terraform-provider-vra7  >/dev/null
 then 
   echo "terraform-provider-vra7 package is missing"
   exit 1
+else
+  echo "################################################################"
+  echo "Terraform package installed successfully with all dependencies"
+  echo "################################################################"
 fi
