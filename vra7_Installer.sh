@@ -41,7 +41,7 @@ then
 fi
 
 ### Install dep package
-curl https://raw.githubusercontent.com/golang/dep/master/install.sh | shi >/dev/null
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh >/dev/null
 sudo mv TerraformPluginProject/bin/dep /usr/bin/
 
 if ! which dep >/dev/null
