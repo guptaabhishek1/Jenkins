@@ -3,10 +3,10 @@ node {
   stage('ResolveDependencies'){
     
      def username = "${env.JIRAUserName}"
-     def password = "${env.JIRAPassword}"
+     def myPassword = "${env.JIRAPassword}"
      def jiraticket = "${env.JIRATicketNumber}"
      //Query Jira to get sourcebranch and targetbranch information
-     wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${myPassword}", var: "${env.JIRAPassword}"]]]) {
+     wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${myPassword}", var: 'PASSWORD']]]) {
         sh 'echo "Hello World ${myPassword}"'
         sh "curl -u ${username}:${myPassword} -H 'Content-Type: application/json' -X GET https://aximglobal.atlassian.net/rest/api/2/issue/${jiraticket}?fields=summary -o /tmp/jira.txt"
      }
