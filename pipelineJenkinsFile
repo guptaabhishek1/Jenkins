@@ -6,7 +6,11 @@ node {
      def password = "${env.JIRAPassword}"
      def jiraticket = "${env.JIRATicketNumber}"
      //Query Jira to get sourcebranch and targetbranch information
-     sh "curl -u ${username}:${env.JIRAPassword} -H 'Content-Type: application/json' -X GET https://aximglobal.atlassian.net/rest/api/2/issue/${jiraticket}?fields=summary -o /tmp/jira.txt"
+     wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${myPassword}", var: "${env.JIRAPassword}"]]]) {
+        sh 'echo "Hello World ${myPassword}"'
+        sh "curl -u ${username}:${myPassword} -H 'Content-Type: application/json' -X GET https://aximglobal.atlassian.net/rest/api/2/issue/${jiraticket}?fields=summary -o /tmp/jira.txt"
+     }
+     
      def sourcebranch = sh(script:"cat /tmp/jira.txt |cut -d '{' -f3|cut -d ':' -f2|grep -o -P '(?<=from).*(?=to)'|sed -e 's/ //g'", returnStdout: true).trim()
      def targetbranch = sh(script:"cat /tmp/jira.txt |cut -d '{' -f3|cut -d ':' -f2|grep -o -P '(?<=to).*(?=for)'|sed -e 's/ //g'", returnStdout: true).trim()
      
