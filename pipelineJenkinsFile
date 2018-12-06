@@ -1,6 +1,6 @@
 node {
 
-  stage('ResolveDependencies') {
+  stage('ResolveDependencies'){
     
      def username = "${env.JIRAUserName}"
      def password = "${env.JIRAPassword}"
@@ -15,8 +15,8 @@ node {
       echo "this is test JIRA" >t2.txt
       cat t2.txt|grep -v JIRA > tmp.txt
       mv tmp.txt >t2.txt
-      echo "export JIRA=$4" >>t2.txt
-     """  
+
+     """
   }
   
   stage('RunSynctools'){
