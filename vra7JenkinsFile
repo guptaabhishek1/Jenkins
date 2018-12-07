@@ -1,43 +1,43 @@
 node{
-    stage("TerraformInstaller") {
-        deleteDir() // Clean up the workspace
-				checkout([$class: 'GitSCM',
-	    		branches: [[name: '*/Terraform']],
+	stage("TerraformInstaller") {
+        	deleteDir() // Clean up the workspace
+		checkout([$class: 'GitSCM',
+			branches: [[name: '*/Terraform']],
 	    		doGenerateSubmoduleConfigurations: false,
 	    		extensions: [[$class: 'CleanCheckout']],
 	    		submoduleCfg: [],
 	    		userRemoteConfigs: [[credentialsId: 'dep-it', url: 'https://github.com/user/repo.git']]
-				])
-				sh """
-					cd repo
-					sh vra7_installer.sh
-				"""
-	  }
+		])
+		sh """
+			cd repo
+			sh vra7_installer.sh
+		"""
+    	}
 
-		stage("TerraformPrep"){
-			deleteDir() // Clean up the workspace of Terraform Installer stage
-			checkout([$class: 'GitSCM',
-				branches: [[name: '*/vra7']],
-				doGenerateSubmoduleConfigurations: false,
-				extensions: [[$class: 'CleanCheckout']],
-				submoduleCfg: [],
-				userRemoteConfigs: [[credentialsId: 'dep-it', url: 'https://github.com/user/repo.git']]
-			])
-      withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
-            sh """
-							cd repo
-							cp $tfvars terraform.tfvars
-						"""
-      }
-			//run terraform init to get all terraform plugins
-      sh "terraform init --get=true"
-    }
+	stage("TerraformPrep"){
+		deleteDir() // Clean up the workspace of Terraform Installer stage
+		checkout([$class: 'GitSCM',
+			branches: [[name: '*/vra7']],
+			doGenerateSubmoduleConfigurations: false,
+			extensions: [[$class: 'CleanCheckout']],
+			submoduleCfg: [],
+			userRemoteConfigs: [[credentialsId: 'dep-it', url: 'https://github.com/user/repo.git']]
+		])
+      		withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
+            		sh """
+				cd repo
+				cp $tfvars terraform.tfvars	
+			"""
+      		}
+		//run terraform init to get all terraform plugins
+      		sh "terraform init --get=true"
+    	}
 
-    stage("TerraformPlan") {
-        sh "terraform plan -out=vra7_installplan.out -no-color"
-    }
+    	stage("TerraformPlan") {
+        	sh "terraform plan -out=vra7_installplan.out -no-color"
+    	}
 
-    stage("TerraformApply") {
-        sh "terraform apply -no-color vra7_installplan.out"
-    }
+    	stage("TerraformApply") {
+        	sh "terraform apply -no-color vra7_installplan.out"
+    	}
 }
