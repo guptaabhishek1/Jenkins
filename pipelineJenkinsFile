@@ -8,7 +8,7 @@ node {
      //Query Jira to get sourcebranch and targetbranch information
      wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${myPassword}", var: 'PASSWORD']]]) {
         sh 'echo "Hello World ${myPassword}"'
-        sh "curl -u ${username}:${myPassword} -H 'Content-Type: application/json' -X GET https://aximglobal.atlassian.net/rest/api/2/issue/${jiraticket}?fields=summary -o /tmp/jira.txt"
+        sh "curl -u ${username}:${myPassword} -H 'Content-Type: application/json' -X GET https://asdfsadf.atlassian.net/rest/api/2/issue/${jiraticket}?fields=summary -o /tmp/jira.txt"
      }
      
      def sourcebranch = sh(script:"cat /tmp/jira.txt |cut -d '{' -f3|cut -d ':' -f2|grep -o -P '(?<=from).*(?=to)'|sed -e 's/ //g'", returnStdout: true).trim()
